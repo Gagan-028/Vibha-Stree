@@ -13,8 +13,7 @@ module.exports ={
     },
     getShop : async(req,res)=>{
         let products = await productModel.find();
-        
-        res.render("shop",{products});
+        res.render("shop",{products,loggedIn:false});
     },
     viewCart : async(req,res)=>{
         

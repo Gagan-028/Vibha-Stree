@@ -32,7 +32,7 @@ module.exports ={
         let user = await userModel.findOne({email:currentUser.email});
         user.cart.push(req.params.productId);
         await user.save();
-        res.redirect("/shop");
+        res.redirect("/products");
     },
 }
 

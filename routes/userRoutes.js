@@ -7,11 +7,10 @@ isAlreadyLoggedIn = require('../middlewares/isAlreadyLoggedIn');
 const productModel = require('../models/product-model');
 
 router.get("/",async(req,res)=>{
-    let products = await productModel.find();
-    res.render("shop",{products,loggedIn:false});
+    res.render("index");
 });
 
-router.get("/shop", ensure.isAlreadyLoggedIn ,userController.getShop);
+router.get("/products", ensure.isAlreadyLoggedIn ,userController.getShop);
 router.get("/logout", ensure.isAlreadyLoggedIn ,userController.logoutUser);
 router.get("/cart", ensure.isAlreadyLoggedIn ,userController.viewCart);
 router.post('/product-display', async (req, res) => {

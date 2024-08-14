@@ -1,88 +1,73 @@
 <%- include('./header') %>
-    <style>
-        body{
-            margin: 0%;
-            width: 100%;
-        }
-        .nav {
-        background-color: #B7D7D5;
-        height: 70px;
-        text-align: left;
-        align-content: center;
-        padding: 10px !important;
-        display:ruby-text;
-        position: static !important;
-      }
-      .nav img {
-        height: 60px;
-        border: 1px solid black;
-        border-radius: 100px;
-      }
-      .pages a{
-        font-family:Georgia, 'Times New Roman', Times, serif;
-        margin-right: 35px;
-        font-size: large;
-      }
-      a {
-        padding: 3px;
-        color: black;
-        text-decoration: none;
-      }
-      .logoutButton{
-        position: relative;
-        padding: 15px;
-        border: none;
-        color: white;
-        background-color: rgb(0, 125, 84);
-        border-radius: 10px;
-        align-self: center;
-        top: 10%;
-      }
-      .mycart{
-        display: flex; 
-        flex-direction: row;
-        margin-bottom: 0%;
-      }
-      table{
-        padding: auto;
-      }
-      .product-image{
-        width: 40%;
-        padding-left:150px;
-        padding-right: 0%;
-        padding-top:5%;
-    }
-    .product-image img{
-        width: 300px;
-        height: 300px;
-    }
-    .product-detail{
-        padding-top:5%;
-      }
-      .product-detail table{
-        padding: 0%;
-      }
-      .product-detail th,td,h1{
-        padding: 10px;
-        text-align: left;
-        padding-right: 150px;
-      }
-      .orderButton{
-        border-radius: 100%;
-        border: none;
-        font-size: 15px;
-        height: 20px;
-        width: 20px;
-        background-color: black;color: white;
-      }
-      input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-  /* -webkit-appearance: none; */
-  margin: 0;
-}
+<style>
+  body{
+    margin: 0%;
+    width: 100%;
+  }
+  .pages a{
+    font-family:Georgia, 'Times New Roman', Times, serif;
+    margin-right: 35px;
+    font-size: large;
+  }
+  a {
+    padding: 3px;
+    color: black;
+    text-decoration: none;
+  }
+  .logoutButton{
+    position: relative;
+    padding: 15px;
+    border: none;
+    color: white;
+    background-color: rgb(0, 125, 84);
+    border-radius: 10px;
+    align-self: center;
+    top: 10%;
+  }
+  .mycart{
+    display: flex; 
+    flex-direction: row;
+    margin-bottom: 0%;
+  }
+  table{
+    padding: auto;
+  }
+  .product-image{
+    width: 40%;
+    padding-left:150px;
+    padding-right: 0%;
+    padding-top:5%;
+  }
+  .product-image img{
+    width: 300px;
+    height: 300px;
+  }
+  .product-detail{
+    padding-top:5%;
+  }
+  .product-detail table{
+    padding: 0%;
+  }
+  .product-detail th,td,h1{
+    padding: 10px;
+    text-align: left;
+    padding-right: 150px;
+  }
+  .orderButton{
+    border-radius: 100%;
+    border: none;
+    font-size: 15px;
+    height: 20px;
+    width: 20px;
+    background-color: black;color: white;
+  }
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    /* -webkit-appearance: none; */
+    margin: 0;
+  }
       
-    </style>
-</head>
+</style>
 <body>
     <!-- <div class="nav">
         <div style="float: left">
@@ -91,7 +76,7 @@ input::-webkit-inner-spin-button {
             <h2>&nbsp;&nbsp;&nbsp;<%= currentUser.fullname %></h2>
             <a href="/logout" style="float: right !important" class="logoutButton">Logout</a>
         <div class="pages" style="float: right ;align-content: center;display: block;block-size: inherit;"> 
-            <a href="/shop">Shop</a>  
+            <a href="/products">Shop</a>  
             <a href="/cart">Cart</a>
             <a href="/profile">Profile</a>
         </div>                
