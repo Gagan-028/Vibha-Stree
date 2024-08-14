@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vibha Stree</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+      body{
+        margin: 0%;
+      }
+    .nav {
+        background-color:#B7D7D5;
+        height: 70px;
+        text-align: -webkit-center;
+        padding: 10px !important;
+        display:ruby-text;
+        position: static !important;
+      }
+      .nav img {
+        height: 60px;
+        padding: 5px;
+      }
+      .pages a{
+        font-family:Georgia, 'Times New Roman', Times, serif;
+        margin-right: 35px;
+        font-size: large;
+
+      } 
+      .search {
+            width: 50%;
+            padding-top: 20px;
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .search-container {
+            position: relative;
+            width: 500px;
+        }
+
+        .search input[type="text"] {
+          width: 90%;
+           padding: 6px 40px 6px 12px; /* Adjust padding to make room for the icon */
+            border: none;
+            border-bottom: 2px solid black;
+            font-size: 17px;
+            background-color: transparent;
+            outline: none; /* Prevents default focus border */
+        }
+
+        .search button {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 24px;
+            color: black; /* Adjust icon color if needed */
+        }
+
+        .search button:focus {
+            outline: none;
+        }
+        .logoutButton{
+        position: relative;
+        padding: 15px;
+        border: none;
+        color: white;
+        background-color: rgb(0, 125, 84);
+        border-radius: 10px;
+        align-self: center;
+        top: 10%;
+      }
+      a {
+        padding: 3px;
+        color: black;
+        text-decoration: none;
+      }
+    
+    </style>
+</head>
+<body>
+  
+  <div class="nav">
+      <div style="float: left">
+        <img src="/images/vibha-stree.png" alt="image" srcset="">
+      </div>
+
+      <% var loggedIn = typeof loggedIn !== "undefined" ? loggedIn : true %>
+      <% if(loggedIn) { %>
+
+        <a href="/logout" style="float: right !important" class="logoutButton">Logout</a>
+        <% }else{ %>
+          <a href="/login" style="float: right !important" class="logoutButton">Login</a>
+      <% } %>
+      
+      <div class="search">
+        <form action="/product-display" method="post">
+            <div class="search-container">
+                <input type="text" placeholder="Search for products and more" name="search">
+                <button type="submit"><i class="fa fa-search"></i></button>
+            </div>
+        </form>
+    </div>
+    
+      <div class="pages" style="float: right ;
+      align-content: center;
+      display: block;
+      block-size: inherit;"> 
+        <a href="/shop">Shop</a>
+        <a href="/cart">Cart</a>
+        <a href="/profile">Profile</a>
+      </div>
+                          
+  </div>
+</body>
+</html>

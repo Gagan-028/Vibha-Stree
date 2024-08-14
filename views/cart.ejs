@@ -1,0 +1,168 @@
+<%- include('./header') %>
+    <style>
+        body{
+            margin: 0%;
+            width: 100%;
+        }
+        .nav {
+        background-color: #B7D7D5;
+        height: 70px;
+        text-align: left;
+        align-content: center;
+        padding: 10px !important;
+        display:ruby-text;
+        position: static !important;
+      }
+      .nav img {
+        height: 60px;
+        border: 1px solid black;
+        border-radius: 100px;
+      }
+      .pages a{
+        font-family:Georgia, 'Times New Roman', Times, serif;
+        margin-right: 35px;
+        font-size: large;
+      }
+      a {
+        padding: 3px;
+        color: black;
+        text-decoration: none;
+      }
+      .logoutButton{
+        position: relative;
+        padding: 15px;
+        border: none;
+        color: white;
+        background-color: rgb(0, 125, 84);
+        border-radius: 10px;
+        align-self: center;
+        top: 10%;
+      }
+      .mycart{
+        display: flex; 
+        flex-direction: row;
+        margin-bottom: 0%;
+      }
+      table{
+        padding: auto;
+      }
+      .product-image{
+        width: 40%;
+        padding-left:150px;
+        padding-right: 0%;
+        padding-top:5%;
+    }
+    .product-image img{
+        width: 300px;
+        height: 300px;
+    }
+    .product-detail{
+        padding-top:5%;
+      }
+      .product-detail table{
+        padding: 0%;
+      }
+      .product-detail th,td,h1{
+        padding: 10px;
+        text-align: left;
+        padding-right: 150px;
+      }
+      .orderButton{
+        border-radius: 100%;
+        border: none;
+        font-size: 15px;
+        height: 20px;
+        width: 20px;
+        background-color: black;color: white;
+      }
+      input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  /* -webkit-appearance: none; */
+  margin: 0;
+}
+      
+    </style>
+</head>
+<body>
+    <!-- <div class="nav">
+        <div style="float: left">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTzSa0_z47xMCQstx5AUS2BGiWd0f4Rxnvs1Q&s" alt="image"srcset=""/>
+        </div>
+            <h2>&nbsp;&nbsp;&nbsp;<%= currentUser.fullname %></h2>
+            <a href="/logout" style="float: right !important" class="logoutButton">Logout</a>
+        <div class="pages" style="float: right ;align-content: center;display: block;block-size: inherit;"> 
+            <a href="/shop">Shop</a>  
+            <a href="/cart">Cart</a>
+            <a href="/profile">Profile</a>
+        </div>                
+    </div> -->
+    <div style="margin-bottom: 5%;">
+      <h1 style="text-align: center;padding-right:0%">Shopping Cart</h1>
+      <hr style="width: 90%; border: 2px solid black;">
+      <% if (user.cart.length > 0) { 
+        var totalMRP = 0;
+        var totalDiscount = 0;
+        var totalPlatformFee = 0;
+        var totalAmount = 0;
+      %>
+        <% user.cart.forEach((product) => {
+          totalMRP += product.price;
+          totalDiscount += product.discount;
+          totalPlatformFee += 100; // Assuming platform fee is fixed per product
+          totalAmount += product.price - product.discount + 100;
+        }) %>
+        <% user.cart.forEach((product) => { %>
+          <div class="mycart">
+            <div class="product-image">                
+              <img src="data:image/jpeg;base64,<%= product.image.toString('base64') %>" alt="" />
+              <div class="content" style="display: flex; flex-direction: row;">
+                <div class="detail">
+                  <h3 style="margin-bottom: 0%;"> <%= product.name %></h3>
+                </div>
+                <div style="height: 20px; align-self: self-end; margin-left: 150px;">
+                  <button class="orderButton">-</button>
+                  <input style="text-align: center;" type="number" min="1" max="20">
+                  <button class="orderButton">+</button> 
+                </div>                    
+              </div> 
+            </div>
+            <div class="product-detail">
+              <table>
+                <tr>
+                  <th>MRP</th>
+                  <td>₹ <%= product.price %></td>
+                </tr>
+                <tr>
+                  <th>Discount</th>
+                  <td>₹ <%= product.discount %></td>
+                </tr>
+                <tr>
+                  <th>Shipping Fee</th>
+                  <td>FREE</td>
+                </tr>
+                <tr>
+                  <th>Platform Fee</th>
+                  <td>₹ 100</td>
+                </tr>
+                <tr>
+                  <th>Sub Total</th>
+                  <td>₹ <%= product.price - product.discount + 100 %></td>
+                </tr>
+              </table>
+            </div>
+          </div>
+        <% }) %>
+      <% } else { %>
+        <div style="margin: 4%;">
+          <h1>Your Cart is empty.....</h1>
+        </div>
+      <% } %>
+    </div>
+    <hr style="width: 90%; border: 2px solid black; font-family:'Times New Roman', Times, serif;">
+    <% if (user.cart.length > 0) { %>
+      <div class="cartTotal" style="float: right; margin-bottom: 10%; ">
+        <h1>Total (<%= user.cart.length %> item<%= user.cart.length > 1 ? 's' : '' %>): ₹ <%= totalAmount %></h1>
+      </div>
+    <% } %>
+    
+        </body>
