@@ -7,13 +7,9 @@ const jwt = require('jsonwebtoken');
 
 
 module.exports ={
-    logoutUser : async (req,res)=>{
-        res.cookie("token","");
-        res.redirect("/");
-    },
-    getShop : async(req,res)=>{
+    getProducts : async(req,res)=>{
         let products = await productModel.find();
-        res.render("shop",{products,loggedIn:false});
+        res.render("shop",{products});
     },
     viewCart : async(req,res)=>{
         
