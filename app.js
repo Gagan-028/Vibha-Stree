@@ -86,7 +86,7 @@ app.post("/login",async (req,res)=>{
                 res.cookie("token",token);
             }
             
-            res.status(202).redirect("/products");
+            res.status(202).redirect("/shop");
         })
     }
         
@@ -110,7 +110,7 @@ app.post("/signup",async (req,res) => {
                 let token = generateToken(users);
                 res.cookie("token",token);
 
-                res.status(201).redirect("/products");
+                res.status(201).redirect("/shop");
             })
         })
         }
