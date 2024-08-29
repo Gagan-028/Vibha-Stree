@@ -86,7 +86,7 @@ app.post("/login",async (req,res)=>{
                 res.cookie("token",token);
             }
             
-            res.status(202).redirect("/shop");
+            res.status(202).redirect("/");
         })
     }
         

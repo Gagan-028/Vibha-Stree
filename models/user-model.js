@@ -1,8 +1,11 @@
 const mongooose = require('mongoose');
 const userSchema = mongooose.Schema({
     fullname : String,
+    mobileNumber : String,
     email : String,
     password : String,
+    gender : String,
+    dob : String,
     cart : [{
         type : mongooose.Schema.Types.ObjectId,
         ref:"product",

@@ -8,7 +8,7 @@ const ensure = require('../middlewares/isAlreadyLoggedIn');
 
 
 router.post("/create", upload.single("image"), productController.createProduct);
-router.get("/addToCart/:productId", ensure.isAlreadyLoggedIn ,productController.addToCart);
+
 
 
 

@@ -1,0 +1,138 @@
+<%- include('./header') %>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link href="https://fonts.googleapis.com/css?family=Assistant:200,300,regular,500,600,700,800" rel="stylesheet" />
+
+
+<style>
+    a{
+        padding: 3px;
+        color: black;
+        text-decoration: none;
+    }
+    /* .out{
+        border: 1px solid black;
+    } */
+    .container{
+        margin: 0% 10% 0% 10%;
+        font-family:Assistant;
+        justify-content: center;
+        display: flex;
+    }
+    .sidebar{
+        display: flex;
+        flex-direction: column;
+        margin: 5%;
+    }
+    .main{
+        border: 1px solid rgba(0, 0, 0, 0.296) ;
+        width: 40%;
+        justify-content: center;
+        margin: 5%;
+        padding: 4% 10% 10% 10%;
+    }
+    form button{
+        border: none;
+        display: block;
+        cursor: pointer;
+        
+        padding: 15px;
+        width: 100%;
+        text-align: center;
+        font-weight: 500;
+        background-color: #FF3F6C;
+        margin-top: 70px;
+        color: white;
+        border-radius: 2px;
+    }
+    table{
+        width: 100%;
+        padding-top: 10%;
+    }
+    tr td{
+        /* margin: 2%; */
+        font-size: 20px;
+        padding: 3%;
+        align-items: center;
+    }
+    .main form{
+        margin-top:10% ;
+    }
+    form input{
+        text-decoration: none;
+        padding: 3%;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+</style>
+
+<body>
+    <h1 style="margin: 10% 0% 0% 0%; text-align: center;">Welcome! <%= currentUser.fullname %></h1>
+    <div class="container">
+        <div class="sidebar">
+            <h4>ACCOUNT</h4>
+            <a href="">Profile</a>
+            <a href="">Addresses</a>
+            <a href="">Delete Account</a>
+            <hr>
+            <h4>ORDERS</h4>
+            <a href="">Orders and Returns</a>
+            <hr>
+        </div>
+        <div class="main">
+            <h2>Edit Profile</h2>
+            <hr>
+            <form action="/profile/edit" method="post">
+                <legend for="name">Full Name*</legend>
+                <input type="text" name="fullname" id="fullname" value="<%= currentUser.fullname %>" placeholder="Enter your email"><br>
+            
+                <label for="email">Email</label>
+                <input type="email" name="email" id="email" value="<%= currentUser.email %>" placeholder="Enter your email"><br>
+            
+                <label for="text">Mobile Number*</label>
+                <input type="text" name="mobileNumber" id="mobileNumber" value="<%= currentUser.mobileNumber %>" placeholder="Enter your mobile number"><br>
+            
+                <label for="dob">Date of Birth (DD/MM/YYYY)</label>
+                <input type="input" name="dob" id="dob" value="<%= currentUser.dob %>"><br>
+            
+                <fieldset style="display: flex;">
+                    <legend for="gender">Gender</legend>
+                    <input type="button" value="Male" name="Male" id="Male" onclick="selectGender('Male')">
+                    <input type="button" value="Female" name="Female" id="Female" onclick="selectGender('Female')">
+                    <input type="button" value="Prefer not to say" name="unknown" id="unknown" onclick="selectGender('unknown')">
+                </fieldset>
+            
+                <input type="hidden" name="selectedGender" id="selectedGender" value="<%= currentUser.gender %>">
+                <button type="submit">Update Profile</button>
+            </form>
+            
+        </div>
+    </div>       
+</body>
+</html>
+<script>
+    // Function to handle the selection and styling of buttons
+    function selectGender(gender) {
+    // Reset all buttons to default color
+    document.getElementById('Male').style.backgroundColor = '';
+    document.getElementById('Female').style.backgroundColor = '';
+    document.getElementById('unknown').style.backgroundColor = '';
+
+    // Set the selected button color
+    document.getElementById(gender).style.backgroundColor = ' #FF3F6C';
+
+    // Set the hidden input value to the selected gender
+    document.getElementById('selectedGender').value = gender;
+}
+
+// Set the correct gender button as selected based on currentUser.gender
+window.onload = function() {
+    const gender = '<%= currentUser.gender %>'; // Get the current gender from the server
+    if (gender) {
+        selectGender(gender); // Highlight the correct gender button
+    } else {
+        selectGender('unknown'); // Default to 'Prefer not to say'
+    }
+};
+
+</script>
