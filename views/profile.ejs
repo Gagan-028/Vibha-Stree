@@ -1,0 +1,149 @@
+<%- include('./header') %>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link href="https://fonts.googleapis.com/css?family=Assistant:200,300,regular,500,600,700,800" rel="stylesheet" />
+<style>
+    a{
+        padding: 3px;
+        color: black;
+        text-decoration: none;
+    }
+    /* .out{
+        border: 1px solid black;
+    } */
+    .container{
+        margin: 0% 10% 0% 10%;
+        font-family:Assistant;
+        justify-content: center;
+        display: flex;
+    }
+    .sidebar{
+        display: flex;
+        flex-direction: column;
+        margin: 5%;
+    }
+    .main{
+        display: block;
+        border: 1px solid rgba(0, 0, 0, 0.296) ;
+        width: 40%;
+        justify-content: center;
+        margin: 5%;
+        padding: 4% 10% 10% 10%;
+    }
+    .address{
+        display: none;
+        border: 1px solid rgba(0, 0, 0, 0.296) ;
+        width: 40%;
+        justify-content: center;
+        margin: 5%;
+        padding: 4% 10% 10% 10%;
+    }
+    .main a{
+        display: block;
+        cursor: pointer;
+        text-transform: uppercase;
+        padding: 15px;
+        width: 100%;
+        text-align: center;
+        font-weight: 800;
+        background-color: #FF3F6C;
+        margin-top: 70px;
+        color: white;
+        border-radius: 2px;
+    }
+    table{
+        width: 100%;
+        padding-top: 10%;
+    }
+    tr td{
+        /* margin: 2%; */
+        font-size: 20px;
+        padding: 3%;
+        align-items: center;
+    }
+      
+</style>
+
+<body>
+    <h1 style="margin: 10% 0% 0% 0%; text-align: center;">Welcome! <%= currentUser.fullname %></h1>
+    <div class="container">
+        <div class="sidebar">
+            <h4>ACCOUNT</h4>
+            <a href="#" id="profile">Profile</a>
+            <a href="#" id="addressLink">Addresses</a>
+            <a href="">Delete Account</a>
+            <hr>
+            <h4>ORDERS</h4>
+            <a href="">Orders and Returns</a>
+            <hr>
+        </div>
+        
+        <div class="main" id="main">
+            <h2>Profile Details</h2>
+            <hr>
+            <table>
+                <tr>
+                    <td>Full Name</td>
+                    <td><%= currentUser.fullname %></td>
+                </tr>
+                <tr>
+                    <td>Mobile Number</td>
+                    <td>
+                        <% if(currentUser.mobileNumber > 0){ %>
+                            <%= currentUser.mobileNumber %>
+                        <% }else{ %>
+                            - not added -
+                        <% } %>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Email ID</td>
+                    <td><%= currentUser.email %></td>
+                </tr>
+                <tr>
+                    <td>Gender</td>
+                    <td>
+                        <% if(currentUser.gender){ %>
+                            <%= currentUser.gender %>
+                        <% }else{ %>
+                            - not added -
+                        <% } %>
+                    </td>
+                </tr>
+                <tr>
+                    <td>D.O.B</td>
+                    <td>
+                        <% if(currentUser.dob){ %>
+                            <%= formattedDOB %>
+                        <% }else{ %>
+                            - not added -
+                        <% } %>
+                    </td>
+                </tr>
+            </table>
+            <a href="/profile/edit">EDIT</a>
+        </div>
+        
+        <div class="address" id="addressDiv" style="display: none;">
+            <h2>Address Details</h2>
+            <!-- Address content goes here -->
+        </div>
+    </div>       
+</body>
+</html>
+<script>
+     document.getElementById('addressLink').addEventListener('click', function(event) {
+        event.preventDefault(); // Prevent the default link behavior
+
+        // Hide the main div and show the address div
+        document.getElementById('main').style.display = 'none';
+        document.getElementById('addressDiv').style.display = 'block';
+    });
+
+    document.getElementById('profile').addEventListener('click', function(event) {
+        event.preventDefault(); // Prevent the default link behavior
+
+        // Show the main div and hide the address div
+        document.getElementById('main').style.display = 'block';
+        document.getElementById('addressDiv').style.display = 'none';
+    });
+</script>

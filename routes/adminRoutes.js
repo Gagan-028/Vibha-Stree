@@ -6,11 +6,7 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const adminController = require("../controllers/adminController")
 
-router.get("/",(req,res)=>{
-    res.redirect("/admin/createProducts")
-})
-
-
+router.get("/",adminController.adminIndexPage);
 router.get("/createProducts",adminController.createProducts);
 
 

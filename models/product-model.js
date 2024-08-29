@@ -6,14 +6,12 @@ const productSchema = mongooose.Schema({
     image : Buffer,
     name : String,
     price : Number,
+    category : String,
     discount : {
         type : Number,
         default : 0,
-    },
-    bgColor : String,
-    panelColor : String,
-    textColor : String
-
-});
+    }
+}, 
+{ timestamps: true });
 
 module.exports = mongooose.model("product",productSchema);

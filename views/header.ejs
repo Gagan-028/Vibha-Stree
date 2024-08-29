@@ -9,34 +9,34 @@
       body{
         margin: 0%;
       }
-    .nav {
+      .nav {
         background-color:#B7D7D5;
         height: 70px;
         text-align: -webkit-center;
         padding: 10px !important;
-        display:ruby-text;
+        display:flex;
         position: static !important;
       }
       .nav img {
         height: 60px;
         padding: 5px;
       }
+      .pages{
+        padding-left: 15%;  
+      }
       .pages a{
         font-family:Georgia, 'Times New Roman', Times, serif;
-        margin-right: 35px;
+        margin-left: 30px;
         font-size: large;
 
       } 
       .search {
-            width: 50%;
-            padding-top: 20px;
-            display: flex;
-            justify-content: flex-end;
-        }
-
-        .search-container {
-            position: relative;
-            width: 500px;
+          width: 50%;
+          padding: 1% 1% 2% 20%;
+          /* display: flex; */
+          justify-content: flex-end;
+          position: relative;
+          width: 500px;
         }
 
         .search input[type="text"] {
@@ -65,16 +65,14 @@
             outline: none;
         }
         .logoutButton{
-        /* width: 150px; */
-        /* left: 93%; */
-        position: relative;
-        padding: 15px;
-        border: none;
-        color: white;
-        background-color: rgb(0, 125, 84);
-        border-radius: 10px;
-        align-self: center;
-        top: 10%;
+          /* position: relative; */
+          padding: 15px;
+          border: none;
+          color: white;
+          background-color: rgb(0, 125, 84);
+          border-radius: 10px;
+          align-self: center;
+          top: 10%;
       }
     
     </style>
@@ -83,26 +81,17 @@
   
   <div class="nav">
       <div style="float: left">
-        <img src="/images/vibha-stree.png" alt="image" srcset="">
+        <a href="/"><img src="/images/vibha-stree.png" alt="image" srcset=""></a>
       </div>
 
-      <% var loggedIn = typeof loggedIn !== "undefined" ? loggedIn : "true" %>
-
-      <% console.log(loggedIn) %>
-      <% if(loggedIn) { %>
-
-        <a href="/logout" style="float: right !important" class="logoutButton">Logout</a>
-        <% }else{ %>
-          <a href="/login" style="float: right !important" class="logoutButton">Login</a>
-      <% } %>
       
       <div class="search">
         <form action="/product-display" method="post">
-            <div class="search-container">
+          <div class="search-container">
                 <input type="text" placeholder="Search for products and more" name="search">
                 <button type="submit"><i class="fa fa-search"></i></button>
             </div>
-        </form>
+          </form>
     </div>
     
       <div class="pages" style="float: right ;
@@ -112,8 +101,14 @@
         <a href="/products">Shop</a>
         <a href="/cart">Cart</a>
         <a href="/profile">Profile</a>
+        <% var loggedIn = typeof loggedIn !== "undefined" ? loggedIn : "true" %>
+        <% if(loggedIn!=="undefined") { %>      
+          <a href="/logout" class="logoutButton">Logout</a>
+          <% }else{ %>
+            <a href="/login" class="logoutButton">Login</a>
+        <% } %>
       </div>
-                          
-  </div>
-</body>
-</html>
+      
+    </div>
+  </body>
+  </html>

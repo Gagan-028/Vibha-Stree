@@ -38,10 +38,13 @@
         .products{
             margin: 5% 5% 5% 5%;
         }
+        .products img{
+            width:  200px;
+            height: 250px;
+        }
         .products-list{
             margin: 5% 0% 0% 0%;
             display: flex;
-            flex-wrap: wrap;
             justify-content: space-between;
         }
         .products-list .product-item{
@@ -191,7 +194,12 @@
         .submit-button:hover {
             background-color: #218838;
         }
-
+        .product-name{
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            max-width:  200px;
+        }
     </style>
 </head>
 <body>
@@ -201,101 +209,48 @@
     <div class="categories">
         <h1>Categories</h1>
         <div class="item-categories">
-            <a href="/product">
-                <img src="/images/default.png"alt="" srcset=""/>
-                <div class="content">
-                    <div class="detail" style="padding: 10px;">
-                        <h2>products name</h2>
+            <% 
+            // Create a Set to store unique categories
+            const uniqueCategories = new Set(products.map(product => product.category));
+            // Convert the Set to an array for iteration
+            const uniqueCategoriesArray = Array.from(uniqueCategories);
+            %>
+            
+            <% uniqueCategoriesArray.forEach(category => { %>
+                <% 
+                // Filter products by category
+                const categoryProducts = products.filter(product => product.category === category);
+                // Assuming you want to show one representative product per category
+                const representativeProduct = categoryProducts[0];
+                %>
+                <a href="/products/<%= category %>">
+                    <img src="data:image/jpeg;base64,<%= representativeProduct.image.toString('base64') %>" alt="" srcset="" />
+                    <div class="content" style="width: 250px">
+                        <div class="detail" style="padding: 10px;">
+                            <h4 style="text-wrap: wrap; text-align: center;"><%= category %></h4>
                         </div>
-                </div>
-            </a>
-            <a href="/product">
-                <img src="/images/default.png"alt="" srcset=""/>
-                <div class="content" style="display: flex; flex-direction: row; justify-content: center;
-">
-                    <div class="detail" style="padding: 10px;">
-                    <h2 style="margin-bottom: 0%;">products name</h2>
                     </div>
-                </div>
-            </a>
-            <a href="/product">
-                <img src="/images/default.png"alt="" srcset=""/>
-                <div class="content" style="display: flex; flex-direction: row; justify-content: center;
-">
-                    <div class="detail" style="padding: 10px;">
-                    <h2 style="margin-bottom: 0%;">products name</h2>
-                    </div>
-                </div>
-            </a>
-            <a href="/product">
-                <img src="/images/default.png"alt="" srcset=""/>
-                <div class="content" style="display: flex; flex-direction: row; justify-content: center;
-">
-                    <div class="detail" style="padding: 10px;">
-                    <h2 style="margin-bottom: 0%;">products name</h2>
-                    </div>
-                </div>
-            </a>
+                </a>
+            <% }) %>
         </div>
     </div>
+    
     <div class="products">
         <h1>Products</h1>
         <div class="products-list">
+            <% products.slice(0, 5).forEach((products)=> { %>
             <div class="product-item" href="/product/:id">
-                <img src="/images/default.png"alt="" srcset=""/>
+                <img src="data:image/jpeg;base64,<%= products.image.toString('base64') %>"alt="" srcset=""/>
                 <div>
-                    <h2>products name</h2>
-                    <h5>products.price</h5>
+                    <h4 class="product-name"><%= products.name%></h4>
+                    <h4>₹ <%= products.price%></h4>
                     <div style="text-align-last: justify;margin: 10px;">
-                        <button class="addCart" type="submit"><i class="fa fa-shopping-cart" style="font-size:15px;text-align: center !important;" >&nbsp;&nbsp;&nbsp;Add to cart</i></button>
+                        <a class="addCart" href="/addToCart/<%= products._id %>" type="submit"><i class="fa fa-shopping-cart" style="font-size:15px;text-align: center !important;" >&nbsp;&nbsp;&nbsp;Add to cart</i></a>
                         <i class="fa fa-heart" style="font-size:25px"></i>
                     </div>
                 </div>
             </div>
-            <div class="product-item" href="/product/:id">
-                <img src="/images/default.png"alt="" srcset=""/>
-                <div>
-                    <h2>products name</h2>
-                    <h5>products.price</h5>
-                    <div style="text-align-last: justify;margin: 10px;">
-                        <button class="addCart" type="submit"><i class="fa fa-shopping-cart" style="font-size:15px;text-align: center !important;" >&nbsp;&nbsp;&nbsp;Add to cart</i></button>
-                        <i class="fa fa-heart" style="font-size:25px"></i>
-                    </div>
-                </div>
-            </div>
-            <div class="product-item" href="/product/:id">
-                <img src="/images/default.png"alt="" srcset=""/>
-                <div>
-                    <h2>products name</h2>
-                    <h5>products.price</h5>
-                    <div style="text-align-last: justify;margin: 10px;">
-                        <button class="addCart" type="submit"><i class="fa fa-shopping-cart" style="font-size:15px;text-align: center !important;" >&nbsp;&nbsp;&nbsp;Add to cart</i></button>
-                        <i class="fa fa-heart" style="font-size:25px"></i>
-                    </div>
-                </div>
-            </div>
-            <div class="product-item" href="/product/:id">
-                <img src="/images/default.png"alt="" srcset=""/>
-                <div>
-                    <h2>products name</h2>
-                    <h5>products.price</h5>
-                    <div style="text-align-last: justify;margin: 10px;">
-                        <button class="addCart" type="submit"><i class="fa fa-shopping-cart" style="font-size:15px;text-align: center !important;" >&nbsp;&nbsp;&nbsp;Add to cart</i></button>
-                        <i class="fa fa-heart" style="font-size:25px"></i>
-                    </div>
-                </div>
-            </div>
-            <div class="product-item" href="/product/:id">
-                <img src="/images/default.png"alt="" srcset=""/>
-                <div>
-                    <h2>products name</h2>
-                    <h5>products.price</h5>
-                    <div style="text-align-last: justify;margin: 10px;">
-                        <button class="addCart" type="submit"><i class="fa fa-shopping-cart" style="font-size:15px;text-align: center !important;" >&nbsp;&nbsp;&nbsp;Add to cart</i></button>
-                        <i class="fa fa-heart" style="font-size:25px"></i>
-                    </div>
-                </div>
-            </div>
+            <% }) %>    
             
         </div>
     </div>
@@ -326,7 +281,7 @@
     </div>
     <div class="review">
         <div class="caraousal">
-            <h2>Name</h2>
+            <h4>Name</h4>
             <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Neque minima ullam excepturi repellat itaque sequi amet dolores, doloremque beatae reprehenderit quis dicta iusto et nisi debitis. Incidunt, quas. Ratione, quia!  
             </p>            
         </div>
