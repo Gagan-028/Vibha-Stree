@@ -6,6 +6,10 @@ const userSchema = mongooose.Schema({
     password : String,
     gender : String,
     dob : String,
+    address : [{
+        type : mongooose.Schema.Types.ObjectId,
+        ref:"userAddress",
+    }],
     cart : [{
         type : mongooose.Schema.Types.ObjectId,
         ref:"product",

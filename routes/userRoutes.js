@@ -17,5 +17,9 @@ router.get('/profile/edit',ensure.isAlreadyLoggedIn,userController.getProfileEdi
 router.post('/profile/edit',ensure.isAlreadyLoggedIn,userController.postProfileEdit);
 router.get("/addToCart/:productId", ensure.isAlreadyLoggedIn,userController.addToCart);
 router.get("/newCollection",userController.newCollection);
+router.post("/saveAddress",ensure.isAlreadyLoggedIn,userController.saveAddress);
+router.delete("/profile/deleteAddress/:userId/:addressId",ensure.isAlreadyLoggedIn,userController.deleteAddress);
+router.get("/deleteAccount/:userId",ensure.isAlreadyLoggedIn,userController.deleteAccount);
+router.post("/contactUs",ensure.isAlreadyLoggedIn,userController.contactUs);
 
 module.exports = router;
