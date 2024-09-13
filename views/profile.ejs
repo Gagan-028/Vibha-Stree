@@ -7,9 +7,6 @@
         color: black;
         text-decoration: none;
     }
-    /* .out{
-        border: 1px solid black;
-    } */
     .container{
         margin: 0% 10% 0% 10%;
         font-family:Assistant;
@@ -20,6 +17,10 @@
         display: flex;
         flex-direction: column;
         margin: 5%;
+
+    }
+    .sidebar a{
+        cursor: pointer;
     }
     .main{
         display: block;
@@ -32,10 +33,18 @@
     .address{
         display: none;
         border: 1px solid rgba(0, 0, 0, 0.296) ;
-        width: 40%;
+        width: 50%;
         justify-content: center;
         margin: 5%;
-        padding: 4% 10% 10% 10%;
+        padding: 5%;
+    }
+    .deleteAccount{
+        display: none;
+        border: 1px solid rgba(0, 0, 0, 0.296) ;
+        width: 50%;
+        justify-content: center;
+        margin: 5%;
+        padding: 5%;
     }
     .main a{
         display: block;
@@ -60,7 +69,160 @@
         padding: 3%;
         align-items: center;
     }
-      
+    .newAddress{
+        cursor: pointer;
+        padding: 15px;
+        border: none;
+        color: white;
+        background-color: rgb(0, 125, 84);
+        border-radius: 10px;
+        align-self: center;
+        top: 10%;
+    }
+    .addressForm{
+        display: none;
+        background-color: white;
+        position: absolute;
+        width: 500px;
+        border: 1px solid black;
+        padding: 2%;
+        padding-bottom: 0%;
+        text-align: center;
+        overflow-y: scroll;
+        height: 400px;
+        top: 20%;
+    }
+    .addressForm input{
+        text-decoration: none;
+        padding: 3%;
+        width: 90%;
+        margin: 1%;
+    }
+    a .formButtons{
+        padding: 20px;
+        width: 100%;
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+    }
+    .buttons {
+        position: sticky;
+        background-color: white;
+        padding: 10px;
+        justify-content: space-around;
+    }
+    .editRemove {
+        position: sticky;
+        background-color: white;
+        padding: 10px;
+        cursor: pointer;
+        display: flex;
+        border-top: 1px solid rgba(0, 0, 0, 0.204);
+        /* border: 1px solid black; */
+    }
+    .editRemove span{
+        width: 100%;
+        text-align: center;
+    }
+    .editRemove:hover {
+        box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    }
+    h4{
+        margin: 0% !important;
+        padding: 0% !important;
+        color: rgba(0, 0, 0, 0.5);
+    }
+    .userAddress{
+        border: 1px solid black;
+        padding: 10px;
+    }
+    .userAddress .addressType{
+        padding: 2px;
+        color: black;
+        background-color: lightgray;
+        float: right;
+        border-radius: 10px;
+    }
+    .deleteAccount{
+        line-height: 25px;
+    }
+    .keepDeleteBtn {
+        cursor: pointer;
+        display: flex;
+        border-top: 1px solid rgba(0, 0, 0, 0.204);
+        justify-content: space-between;
+    }
+    .keepDeleteBtn .deleteBtn {
+        width: 45%;
+        padding: 10px;
+        text-align: center;
+        margin: 0px;
+        border: 3px solid #ff3f6c70;
+        border-radius: 5px;
+        cursor: pointer;
+        color: #ff3f6c70;
+    }
+    .keepDeleteBtn .keepAccount {
+        align-content: center;
+        text-align: center;
+        width: 45%;
+        padding: 10px;
+        border: none;
+        color: white;
+        border-radius: 5px;
+        cursor: pointer;
+        background-color: #FF3F6C;
+    }
+    .deleteAccount input[type="checkbox"]:checked ~ .keepDeleteBtn .deleteBtn {
+        width: 45%;
+        padding: 10px;
+        text-align: center;
+        margin: 0px;
+        border: 3px solid #FF3F6C;
+        border-radius: 5px;
+        cursor: pointer;
+        color: #FF3F6C;
+    }
+    .dialog-overlay {
+    display: none; /* Initially hidden */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    z-index: 1000;
+    }
+
+    .dialog-box {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: white;
+        padding: 20px;
+        border-radius: 10px;
+        text-align: center;
+        z-index: 1001;
+    }
+
+    .dialog-buttons {
+        margin-top: 20px;
+    }
+
+    .confirm-btn, .cancel-btn {
+        padding: 10px 20px;
+        margin: 0 10px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    .confirm-btn {
+        background-color: red;
+        color: white;
+    }
+
 </style>
 
 <body>
@@ -68,9 +230,9 @@
     <div class="container">
         <div class="sidebar">
             <h4>ACCOUNT</h4>
-            <a href="#" id="profile">Profile</a>
-            <a href="#" id="addressLink">Addresses</a>
-            <a href="">Delete Account</a>
+            <a id="profile">Profile</a>
+            <a id="addressLink">Addresses</a>
+            <a id="deleteAcc">Delete Account</a>
             <hr>
             <h4>ORDERS</h4>
             <a href="">Orders and Returns</a>
@@ -123,27 +285,188 @@
             <a href="/profile/edit">EDIT</a>
         </div>
         
-        <div class="address" id="addressDiv" style="display: none;">
-            <h2>Address Details</h2>
-            <!-- Address content goes here -->
+        <div class="address" id="addressDiv">
+            <div style="display: flex; width: 100%; justify-content: space-between;">
+                <h2>Address Details</h2>
+                
+                <% if(user.address.length >= 3) { %>
+                    <input type="button" id="openForm" class="newAddress" value="+ ADD NEW ADDRESS" style="text-decoration: line-through;" disabled >
+                    <% } else { %>
+                    <input type="button" id="openForm" class="newAddress" value="+ ADD NEW ADDRESS">
+                <% } %>
+            </div>
+            <% user.address.forEach((userAddress) => { %>
+            <div class="userAddress">
+                <h4> <b><%= userAddress.fullname %></b> <span class="addressType"><%= userAddress.addressType %></span></h4><br>
+                <h4><%= userAddress.address %> </h4>
+                <h4><%= userAddress.district %> </h4>
+                <h4><%= userAddress.state %></h4>
+                <h4><%= userAddress.pincode%></h4>
+                <h4><%= userAddress.mobileNumber %></h4>
+                <div class="editRemove">
+                    <span onclick="editAddress('<%= currentUser._id %>', '<%= userAddress._id %>')">Edit</span>
+                    <span onclick="deleteAddress('<%= currentUser._id %>', '<%= userAddress._id %>')">Remove</span>
+                </div>
+                <br><br>                      
+            </div>
+            <% }) %>
+            
+            
+            
         </div>
+        <form action="/saveAddress" class="addressForm" id="addressForm" method="post">
+                <input type="text" name="fullname" id="fullname" placeholder="Name*">
+                <input type="text" name="mobileNumber" id="mobileNumber" placeholder="Mobile*">
+                <input type="text" name="address" id="address" placeholder="Address(House No, Building No, Stree, Area)*">
+                <input type="text" name="district" id="district" placeholder="City/ District*">
+                <input type="text" name="state" id="state" placeholder="State*">
+                <input type="text" name="pincode" id="pincode" placeholder="Pincode*">
+                <label for="addressType" style="text-align: left;">Type of Address</label>
+                <label for="home">Home</label>
+                <input type="radio" value="home" name="addressType" id="home" value="Home" onclick="selectGender('Home')">
+                <label for="office">Office</label>
+                <input type="radio" value="office" name="addressType" id="office" value="Office" onclick="selectGender('Office')">
+                <div class="buttons" style="display: flex;">
+                    <a id="closeFrom" ><input type="button" value="Cancel" class="formButtons"/></a>
+                    <a id="save"><input type="submit" value="Save" class="formButtons"/></a>
+                </div>
+        </form>
+        <form action="/updateAddress" class="addressForm" id="editAddressForm" method="post">
+            <% user.address.map((userAddress) => { %>
+                <input type="text" name="fullname" id="fullname" value="<%= userAddress.fullname %>" placeholder="Name*">
+                <input type="text" name="mobileNumber" id="mobileNumber" value="<%= userAddress.mobileNumber %>" placeholder="Mobile*">
+                <input type="text" name="address" id="address" value="<%= userAddress.address %>" placeholder="Address(House No, Building No, Stree, Area)*">
+                <input type="text" name="district" id="district" value="<%= userAddress.district %>" placeholder="City/ District*">
+                <input type="text" name="state" id="state" value="<%= userAddress.state %>" placeholder="State*">
+                <input type="text" name="pincode" id="pincode" value="<%= userAddress.pincode%>" placeholder="Pincode*">
+                <label for="addressType" style="text-align: left;">Type of Address</label>
+                <label for="home">Home</label>
+                <input type="radio" value="home" name="addressType" id="home" value="Home" onclick="selectGender('Home')">
+                <label for="office">Office</label>
+                <input type="radio" value="office" name="addressType" id="office" value="Office" onclick="selectGender('Office')">
+                <div class="buttons" style="display: flex;">
+                    <a id="closeEditFrom" ><input type="button" value="Cancel" class="formButtons"/></a>
+                    <a id="save"><input type="submit" value="Save" class="formButtons"/></a>
+                </div>
+            <% }) %>
+        </form>
+        <div class="deleteAccount" id="deleteAccount">
+            <h2>Delete Account</h2>
+            <img src="images/delete-account.jpg" alt="account delete" style="    display: block;
+            margin: auto;
+            padding: 20px;"><br>
+            <b>Is this goodbye? Are you sure you don't want to reconsider?</b><br><br>
+            <div>
+                <li><b>You'll lose your order history, saved details, Vibha Stree Credit, SuperCoins and all other coupons and benefits.</b><br>
+                    Any account related benefits will be forfeited once the account is deleted and will no longer be available to you. You cannot recover the same. However, you can always create a new account. By deleting your account, you acknowledge you have read our Privacy Policy.</li>
+                <li><b>Any pending orders, exchanges, returns or refunds will no longer be accessible via your account.</b><br>
+                    Vibha Stree will try to complete the open transactions in the next 30 days on a best effort basis. However, we cannot ensure tracking & traceability of transactions once the account is deleted.</li>
+                <li><b>Vibha Stree may not extend New User coupon if an account is created with the same mobile number or email id.</b><br>
+                    </li><br>
+                    <input type="checkbox" name="t&c" id="t&c" value="t&c">
+                    <label class="tcLabel" for="checkbox">I agree to all the terms and conditions*</label><br><br>
+                <div class="keepDeleteBtn">
+                    <a id="deleteAccountLink" class="deleteBtn">DELETE ANYWAY</a>
+                    <a href="/" class="keepAccount">KEEP ACCOUNT</a>
+                </div>
+            </div>
+        </div>
+            
     </div>       
+    <div id="confirmationDialog" class="dialog-overlay">
+        <div class="dialog-box">
+            <h2>Are you sure you want to delete your account?</h2>
+            <p>This action cannot be undone.</p>
+            <div class="dialog-buttons">
+                <button id="confirmDelete" class="confirm-btn">Yes, Delete</button>
+                <button id="cancelDelete" class="cancel-btn">Cancel</button>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
 <script>
-     document.getElementById('addressLink').addEventListener('click', function(event) {
-        event.preventDefault(); // Prevent the default link behavior
-
-        // Hide the main div and show the address div
-        document.getElementById('main').style.display = 'none';
-        document.getElementById('addressDiv').style.display = 'block';
+    document.getElementById('deleteAccountLink').addEventListener('click', function(event) {
+    event.preventDefault(); 
+    // Show the dialog
+    document.getElementById('confirmationDialog').style.display = 'block'; 
+    });
+    // Hide the dialog
+    document.getElementById('cancelDelete').addEventListener('click', function() {
+        document.getElementById('confirmationDialog').style.display = 'none'; 
     });
 
-    document.getElementById('profile').addEventListener('click', function(event) {
-        event.preventDefault(); // Prevent the default link behavior
+    document.getElementById('confirmDelete').addEventListener('click', function() {
+        window.location.href = "/deleteAccount/<%= currentUser._id %>"; 
+    });
+    //         TO EDIT THE USER ADDRESS
+    function editAddress(userId, addressId) {
+        document.getElementById('editAddressForm').style.display = 'block';
+        document.getElementById('fullname').focus();
+    }
+    //         TO CLOSE EDIT ADDRESS FORM
+    document.addEventListener('DOMContentLoaded', function() {
+    let closeButton = document.getElementById('closeEditFrom');
+    if (closeButton) {
+        closeButton.addEventListener('click', function(event) {
+            event.preventDefault(); 
+            document.getElementById('editAddressForm').style.display = 'none';
+            let form = document.getElementById('addressForm');
+            form.reset();
+        });
+    }
+});
+    //         TO DELETE THE USER ADDRESS
+    function deleteAddress(userId, addressId) {
+        if (confirm("Are you sure you want to delete this address?")) {
+            fetch(`/profile/deleteAddress/${userId}/${addressId}`, {
+                method: 'DELETE'
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.message) {
+                    location.reload();
+                } else {
+                    alert('Error deleting address');
+                }
+            })
+            .catch(error => {
+                console.error("Error deleting address:", error);
+                alert('Error deleting address');
+            });
+        }
+    }
 
-        // Show the main div and hide the address div
+    //         TO CLOSE  NEW FORM
+     document.getElementById('closeFrom').addEventListener('click', function(event) {
+        event.preventDefault(); 
+        document.getElementById('addressForm').style.display = 'none';
+        let form = document.getElementById('addressForm');
+        form.reset();
+    });
+    //         TO OPEN THE NEW FORM
+    document.getElementById('openForm').addEventListener('click', function(event) {
+        event.preventDefault(); 
+        document.getElementById('addressForm').style.display = 'block';
+        document.getElementById('fullname').focus();
+    });
+    document.getElementById('profile').addEventListener('click', function(event) {
+        event.preventDefault();
         document.getElementById('main').style.display = 'block';
+        document.getElementById('deleteAccount').style.display = 'none';
         document.getElementById('addressDiv').style.display = 'none';
     });
+    document.getElementById('addressLink').addEventListener('click', function(event) {
+        event.preventDefault(); 
+        document.getElementById('addressDiv').style.display = 'block';
+        document.getElementById('main').style.display = 'none';
+        document.getElementById('deleteAccount').style.display = 'none';
+    });
+    document.getElementById('deleteAcc').addEventListener('click', function(event) {
+        event.preventDefault();
+        document.getElementById('deleteAccount').style.display = 'block';
+        document.getElementById('main').style.display = 'none';
+        document.getElementById('addressDiv').style.display = 'none';
+    });
+    
 </script>

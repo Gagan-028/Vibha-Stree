@@ -11,8 +11,8 @@ const db = require('./config/mongoose-connect')
 require('dotenv').config();
 const flash = require('connect-flash'); 
 const expressSession = require('express-session'); 
+const nodemailer = require("nodemailer");
 let alert = require('alert'); 
-
 
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
@@ -61,7 +61,7 @@ app.post("/login",async (req,res)=>{
     
     let {email,password} = req.body;
     let user = await userModel.findOne({email})
-    let products = await productModel.find();
+    let products = await productModel.find();   
     if(!user){   
         let user = await adminModel.findOne({email})
         if(!user){   
@@ -110,7 +110,7 @@ app.post("/signup",async (req,res) => {
                 let token = generateToken(users);
                 res.cookie("token",token);
 
-                res.status(201).redirect("/shop");
+                res.status(201).redirect("/");
             })
         })
         }
