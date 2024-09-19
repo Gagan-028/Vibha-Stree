@@ -1,12 +1,21 @@
-const mongooose = require('mongoose');
+const mongoose = require('mongoose');
 
-
-mongooose.connect("mongodb://localhost:27017/VibhaStree")
-.then(()=>{
+mongoose.connect("mongodb://localhost:27017/VibhaStree", {
+    serverSelectionTimeoutMS: 30000, // Increase timeout to 30 seconds
+}).then(() => {
     console.log("Database is connected");
-})
-.catch((err)=>{
-    console.log("Database Error");
-})
+}).catch((err) => {
+    console.error("Database connection error:", err);
+});
 
-module.exports = mongooose.connection;
+mongoose.connection.on('connected', () => {
+    console.log('Mongoose connected to DB');
+});
+
+mongoose.connection.on('error', (err) => {
+    console.error('Mongoose connection error:', err);
+});
+
+mongoose.connection.on('disconnected', () => {
+    console.log('Mongoose disconnected');
+});
