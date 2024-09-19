@@ -33,10 +33,13 @@
   .product-detail table{
     padding: 0%;
   }
+  .product-detail h1{
+      padding: 10px;
+      text-align: left;
+      padding-right: 150px;
+  }
   .product-detail th,td,h1{
-    padding: 10px;
     text-align: left;
-    padding-right: 150px;
   }
   .orderButton{
     border-radius: 100%;
@@ -50,6 +53,21 @@
   input::-webkit-inner-spin-button {
     /* -webkit-appearance: none; */
     margin: 0;
+  }
+  .cartTotal{
+    padding-right: 150px;
+  }
+  .placeOrder{
+    display: block;
+    border-radius: 10px;
+    border: none;
+    align-content: center;
+    text-align: center;
+    font-size: 30px;
+    height: 50px;
+    width: inherit;
+    background-color: #5800f4;
+    color: white;
   }
       
 </style>
@@ -115,6 +133,7 @@
     <% if (user.cart.length > 0) { %>
       <div class="cartTotal" style="float: right; margin-bottom: 10%; ">
         <h1>Total (<%= user.cart.length %> item<%= user.cart.length > 1 ? 's' : '' %>): ₹ <%= totalAmount %></h1>
+        <a href="" class="placeOrder">Place Order</a>
       </div>
     <% } %>
     

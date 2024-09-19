@@ -13,7 +13,7 @@ const flash = require('connect-flash');
 const expressSession = require('express-session'); 
 const nodemailer = require("nodemailer");
 let alert = require('alert'); 
-
+const ensure = require('./middlewares/isAlreadyLoggedIn')
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 app.use(cookieParser());
