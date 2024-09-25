@@ -3,86 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Signup/Login</title>
-    <style>
-        body{
-            background-color: seagreen;
-        }
-        .form{
-            display: flex;
-            width: 100%;
-            margin: auto ;
-            margin-top: 150px;
-            text-align: center;
-            align-items: center;
-            justify-content: center;
-        }
-        .form h1{
-            font-size: 40px;
-            
-        }
-        .signupForm{
-            height: 450px;
-            background-color: white !important;
-            margin-right: 100px !important;
-            border: 1px solid black;
-            border-radius: 7px;
-            width: 30%;
-            margin: 10px;
-            padding: 20px;
-        }
-        .loginForm{
-            height: 400px !important;
-            background-color: white !important;
-            border: 1px solid black;
-            border-radius: 7px;
-            margin: 10px;
-            width: 30%;
-            padding: 20px;
-            
-        }
-        .loginForm input{
-            padding: auto;
-        }
-        input{
-            height: 20px;
-            width: 400px;
-            border-radius: 5px;
-            border: 1px solid;
-            padding: 10px;
-            margin-bottom: 30px;
-        }
-        .form button{
-            margin-top: 30px !important;
-            padding: 15px;
-            color: white;
-            font-size: 15px;
-            min-width: 100px;
-            border-radius: 10px;
-            border: 1px solid;
-            background-color: seagreen;
-        }
-       
-    </style>
+    <title>Vibha Stree</title>
+    <link rel="stylesheet" href="/css/global.css">
 </head>
 <body>
-    <section class="form">
-        <form action="/signup" class="signupForm" method="post">
-            <h1>Signup</h1>
-            <input type="text" name="fullname" placeholder="Enter fullname"><br>
-            <input type="email" name="email" placeholder="Enter email"><br>
-            <input type="password" name="password" placeholder="Enter a strong password"><br>
-            <button type="submit">Signup</button>
-        </form>
-
-        <form action="/login" class="loginForm" method="post">
-            <h1>Login</h1>
-            <input type="text" name="email" id="email" placeholder="Enter your email"><br>
-            <input type="password" name="password" id="password" placeholder="Please enter you password"><br>
-            <button type="submit">Login</button>
-        </form>
-
-    </section>
-    
+    <div class="w-full h-screen flex px-20">
+        <div class="w-1/2 flex items-center justify-center h-screen">
+            <div class="w-full px-32">
+                <h3 class="text-4xl mb-5">welcome to <span class="text-blue-400 font-semibold">Vibha Stree</span></h3>
+                <h4 class="text-2xl mb-5">Create your account</h4>
+                <form autocomplete="off" action="/signup" method="post">
+                    <input
+                        class="bg-zinc-100 block w-full px-3 py-2 border-[1px] rounded-md mb-3 border-zinc-200"
+                        type="text" placeholder="Full Name" name="fullname">
+                    <input
+                        class="bg-zinc-100 block w-full px-3 py-2 border-[1px] rounded-md mb-3 border-zinc-200"
+                        type="email" placeholder="Email" name="email">
+                    <input
+                        class="bg-zinc-100 block w-full px-3 py-2 border-[1px] rounded-md mb-3 border-zinc-200"
+                        type="password" placeholder="Password" name="password">
+                    <input class="px-5 rounded-md py-3 mt-2 bg-blue-500 text-white" type="submit"
+                        value="Create My Account">
+                </form>
+            </div>
+        </div>
+        <div class="w-1/2 flex items-center justify-center h-screen">
+            <div class="w-full px-32">
+                <h4 class="text-2xl capitalize mb-5">Login</h4>
+                <form autocomplete="off" action="/login" method="post">
+                    <input
+                        class="block bg-zinc-100 w-full px-3 py-2 border-[1px] rounded-md mb-3 border-zinc-200"
+                        type="email" placeholder="Email" name="email">
+                    <input
+                        class="block bg-zinc-100 w-full px-3 py-2 border-[1px] rounded-md mb-3 border-zinc-200"
+                        type="password" placeholder="Password" name="password">
+                    <input class="px-5 block rounded-md py-3 mt-2 bg-blue-500 text-white" type="submit"
+                        value="Login">
+                </form>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

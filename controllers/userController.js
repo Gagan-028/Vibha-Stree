@@ -18,7 +18,7 @@ module.exports ={
             } else {
                 products = await productModel.find({ category: category });
             }
-            res.render("index", { products, category,loggedIn:"false" });
+            res.render("index", { products, category });
         } catch (error) {
             console.error(error);
             res.status(500).send("Server Error");
@@ -33,10 +33,22 @@ module.exports ={
         let products = await productModel.find();
         res.render("shop",{products,category: 'All Products'});
     },
-    viewCart : async(req,res)=>{
-        
-        let user = await userModel.findOne({email:currentUser.email}).populate("cart");
-        res.render("cart",{user});
+    viewCart: async (req, res) => {
+        try {
+            let user = await userModel.findOne({ email: currentUser.email })
+                .populate({
+                    path: 'cart.product', 
+                    model: 'Product' 
+                });
+            const populatedCart = user.cart.map(cartItem => ({
+                ...cartItem.product._doc, 
+                quantity: cartItem.quantity 
+            }));
+            res.render('cart', { user: { ...user._doc, cart: populatedCart } });
+        } catch (error) {
+            console.error("Error loading cart:", error);
+            res.status(500).send("An error occurred while loading the cart.");
+        }
     },
     viewCategory : async (req, res) => {
         try {
@@ -73,12 +85,31 @@ module.exports ={
             res.status(500).send("An error occurred while updating the profile");
         }
     },
-    addToCart:async(req,res)=>{
-        let user = await userModel.findOne({email:currentUser.email});
-        user.cart.push(req.params.productId);
-        await user.save();
-        res.redirect("/products");    
+    addToCart: async (req, res) => {
+        try {
+            let user = await userModel.findOne({ email: currentUser.email });
+            if (!user.cart) {
+                user.cart = [];
+            }
+            const existingProduct = user.cart.find(item => item.product.toString() === req.params.productId);
+            if (existingProduct) {
+                existingProduct.quantity += 1;
+            } else {
+                user.cart.push({
+                    product: req.params.productId, 
+                    quantity: 1
+                });
+            }
+    
+            // Save the user with the updated cart
+            await user.save();
+            res.redirect("/products");
+        } catch (error) {
+            console.error("Error adding to cart:", error);
+            res.status(500).send("An error occurred while adding the product to the cart.");
+        }
     },
+    
     searchProduct : async (req, res) => {
         let {search} = req.body;
         let searchedProduct = await productModel.find({name:search});

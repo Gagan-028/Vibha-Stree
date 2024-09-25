@@ -42,6 +42,7 @@ const { log } = require('console');
 const { hash } = require('crypto');
 const { loadavg } = require('os');
 const { generateToken } = require('./utils/generateTokens');
+const isAlreadyLoggedIn = require('./middlewares/isAlreadyLoggedIn');
 
 
 app.use("/admin",adminRoutes);
@@ -64,10 +65,8 @@ app.post("/login",async (req,res)=>{
     let products = await productModel.find();   
     if(!user){   
         let user = await adminModel.findOne({email})
-        if(!user){   
-            
+        if(!user){ 
             res.status(404).send("Account does not exist! Please signup to continue.");
-        
         }
         else {
             bcrypt.compare(password,user.password,(err,result)=>{
@@ -102,7 +101,7 @@ app.post("/signup",async (req,res) => {
             
             bcrypt.genSalt(10,(err,salt)=>{
             bcrypt.hash(password,salt, async (err,hash)=>{
-                let users = await userModel.create({
+                let users = await adminModel.create({
                     fullname,
                     email,
                     password:hash

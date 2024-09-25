@@ -1,0 +1,42 @@
+<%- include('./header') %>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Coupon</title>    
+</head>
+<body>
+    <div class="flex">
+        <div class="font-verdana font-semibold bg-slate-400">
+          <div class="flex flex-col p-14">
+              <a class="p-1 text-black " href="">All Products</a>
+              <a class="p-1 text-black " href="">Create new products</a>
+              <a class="p-1 text-black " href="/admin/createCoupons">Create Coupon</a>
+          </div>
+      </div>
+      <div class="font-verdana font-semibold w-3/4 bg-white p-28">
+        <h1 class="font-custom-sans text-4xl p-20">Create New Product</h1>
+        <div class="p-16">
+           <form class="box-border border-black p-8 rounded-xl bg-slate-400 border-2 border-solid grid grid-cols-3 gap-y-4" id="productForm" action="/product/create" method="post" enctype="multipart/form-data">
+            <label for="file">Upload Image</label>
+            <input class="border-black border  w-64 p-3 rounded-md " type="file" name="image" id="image">
+            <br><label for="name">Enter Name</label>
+            <input class="border-black border w-64 p-3 rounded-md " type="text" name="name" id="name" placeholder="Product Name">
+            <br><label for="price">Enter Price</label>
+            <input class="border-black border w-64 p-3 rounded-md " type="text" name="price" id="price" placeholder="Product Price">
+            <br><label for="price">Enter Discount</label>
+            <input class="border-black border w-64 p-3 rounded-md " type="text" name="discount" id="discount" placeholder="Discount Price">
+            <br><label>Choose Category</label>
+            <select class="p-4 w-fit appearance-none text-sm bg-white border-solid border-2 border-black  rounded text-black cursor-pointer" name="category" id="category">
+              <option class="p-4" value="default">Choose a category</option>
+              <option class="p-4" value="Salwar Suits">Salwar Suits</option>
+              <option class="p-4" value="Saree">Saree</option>
+              <option class="p-4" value="Kurtis">Kurtis</option>
+              <option class="p-4" value="Ethnic Wear">Ethnic Wear</option>
+            </select><br>
+            <button class=" p-3 w-64 items-center rounded-lg border bg-blue-700 text-white" type="submit">Create Product</button>
+          </form>
+        </div>
+    </div>
+      </div>
+</body>
+</html>

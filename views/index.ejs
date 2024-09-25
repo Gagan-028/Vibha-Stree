@@ -1,214 +1,13 @@
 <%- include('./header') %>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <style>
-        body{
-            margin: 0% ;
-        }
-        a {
-            padding: 3px;
-            color: black;
-            text-decoration: none;
-        }
-        .banner-image img{
-            width: 100%;
-            height: 500px;
-        }
-        
-        h1{
-            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-            font-size: 50px;
-            text-align: center;
-        }
-        .categories{
-            margin: 5% 0% 5% 0%;
-        }
-        .item-categories{
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-evenly;
-            margin: 0% 5% 0% 5%;
-        }
-        .item-categories a{
-            margin: 3%;
-        }
-        .item-categories img{
-            height: 250px;
-            width: 250px;
-        }
-        .products{
-            margin: 5% 5% 5% 5%;
-        }
-        .products img{
-            width:  200px;
-            height: 250px;
-        }
-        .products-list{
-            margin: 5% 0% 0% 0%;
-            display: flex;
-            justify-content: space-between;
-        }
-        .products-list .product-item{
-            margin: 1%;
-            margin-bottom: 3%;
-        }
-        .addCart{
-            text-align-last: center;
-            padding: 10px;
-            background-color: rgb(0, 115, 255);
-            border: none;
-            border-radius: 5px;
-            font-size: 10px;
-        }
-        .aboutUs{
-            width: 100%;
-            margin: 10% 0% 5% 0%;
-        }
-        .aboutUs img{
-            width: 50%;
-            height: 500px;
-        }
-        .aboutUs .banner-text{
-            background: rgb(9,9,121);
-            background: linear-gradient(197deg, rgba(9,9,121,1) 37%, rgba(255,0,44,1) 100%);   
-            margin: 5% 5% 5% 5%;
-            justify-content: space-evenly;
-            display: flex;
-        }
-        .banner-text p{
-            padding: 5%;
-            font-size:17px;
-            text-align: center;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        .gallery{
-            margin: 10% 5% 5% 5%;
-        }
-        .gallery-images{
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-        }
-        .gallery-images img{
-            height: 250px;
-            width: 400px;
-            border-radius: 15px;
-        }
-        .gallery-images div{
-            margin: 5% 2% 0% 2%;
-            justify-content: space-evenly;
-        }
-        .review{
-            height: 500px;
-            margin: 10% 0% 5% 0%;
-            background: url('/images/Reviews-banner.jpg');
-            background-color: white;
-            background-size: cover;            
-        }
-        .caraousal{
-            margin: 10%;
-            flex-wrap: wrap;
-            text-wrap: wrap;
-            float: right;
-            width: 35%;
-        }
-        .caraousal p{
-            display: flex;
-            /* text-wrap: wrap;  */
-            /* margin: 5%; */
-
-            font-size: 20px;
-        }
-        .contactUs{
-            margin-top: 10%;
-        }
-        .form{
-            background: rgb(238,174,202);
-            background: linear-gradient(90deg, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 100%);
-            height: 100%;
-            margin-top: 5%;
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        .contactForm{
-            margin: 5%;
-            width: 40%;
-        }
-        textarea:focus, input:focus{
-            outline: none;
-            border-color: #ffffff;
-            box-shadow: 0 0 10px #ffffff;
-        }
-        .contact-form-container {
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            max-width: 600px;
-            width: 100%;
-        }
-        .form-group {
-            margin-bottom: 1rem;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: bold;
-            color: #333;
-        }
-
-        input, textarea {
-            width: 100%;
-            padding: 0.8rem;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            box-sizing: border-box;
-            font-size: 1rem;
-        }
-
-        textarea {
-            resize: vertical;
-        }
-
-        .error-message {
-            color: red;
-            font-size: 0.875rem;
-            display: none; /* Hidden by default */
-        }
-
-        .submit-button {
-            background-color: #28a745;
-            color: white;
-            border: none;
-            padding: 0.75rem;
-            border-radius: 4px;
-            font-size: 1rem;
-            cursor: pointer;
-            width: 100%;
-            transition: background-color 0.3s;
-        }
-
-        .submit-button:hover {
-            background-color: #218838;
-        }
-        .product-name{
-            overflow: hidden;
-            white-space: nowrap;
-            text-overflow: ellipsis;
-            max-width:  200px;
-        }
-    </style>
 </head>
 <body>
-    <div class="banner-image"> 
-            <img src="/images/saffron-robes-indian-illustratio.jpg" alt="banner-image" srcset="">
+    <div> 
+            <img  class="w-full h-96" src="/images/saffron-robes-indian-illustratio.jpg" alt="banner-image" srcset="">
     </div>
-    <div class="categories">
-        <h1>Categories</h1>
-        <div class="item-categories">
+    <div class="my-20 mb-0">
+        <h1 class="my-10 font-serif text-5xl text-center">Categories</h1>
+        <div class="flex flex-wrap content-evenly mx-20">
             <% 
             // Create a Set to store unique categories
             const uniqueCategories = new Set(products.map(product => product.category));
@@ -223,11 +22,11 @@
                 // Assuming you want to show one representative product per category
                 const representativeProduct = categoryProducts[0];
                 %>
-                <a href="/products/<%= category %>">
-                    <img src="data:image/jpeg;base64,<%= representativeProduct.image.toString('base64') %>" alt="" srcset="" />
-                    <div class="content" style="width: 250px">
-                        <div class="detail" style="padding: 10px;">
-                            <h4 style="text-wrap: wrap; text-align: center;"><%= category %></h4>
+                <a class="p-1 text-black no-underline m-auto my-10" href="/products/<%= category %>">
+                    <img class="h-72 w-64" src="data:image/jpeg;base64,<%= representativeProduct.image.toString('base64') %>" alt="" srcset="" />
+                    <div class="w-60" >
+                        <div class="p-3">
+                            <h4 class="text-wrap text-center text-lg font-bold" ><%= category %></h4>
                         </div>
                     </div>
                 </a>
@@ -235,18 +34,19 @@
         </div>
     </div>
     
-    <div class="products">
-        <h1>Products</h1>
-        <div class="products-list">
+    <div class="m-10">
+        <h1 class="my-10 font-serif text-5xl text-center">Products</h1>
+        <div class="overflow-x-auto mt-10 flex content-between">
             <% products.slice(0, 5).forEach((products)=> { %>
-            <div class="product-item" href="/product/:id">
-                <img src="data:image/jpeg;base64,<%= products.image.toString('base64') %>"alt="" srcset=""/>
+            <div class="m-5 mb-5 shadow-lg" href="/product/:id">
+                <img class="size-64" src="data:image/jpeg;base64,<%= products.image.toString('base64') %>"alt="" srcset=""/>
                 <div>
-                    <h4 class="product-name"><%= products.name%></h4>
-                    <h4>₹ <%= products.price%></h4>
-                    <div style="text-align-last: justify;margin: 10px;">
-                        <a class="addCart" href="/addToCart/<%= products._id %>" type="submit"><i class="fa fa-shopping-cart" style="font-size:15px;text-align: center !important;" >&nbsp;&nbsp;&nbsp;Add to cart</i></a>
-                        <i class="fa fa-heart" style="font-size:25px"></i>
+                    <h4 class="overflow-hidden whitespace-nowrap text-ellipsis max-w-52 font-bold"><%= products.name%></h4>
+                    <h4 class="font-bold">₹ <%= products.price%></h4>
+                    <div class="text-left m-3 flex 
+                    justify-between pt-5">
+                        <a class=" text-black no-underline text-center p-3 bg-blue-500 border-none rounded-md text-base" href="/addToCart/<%= products._id %>" type="submit"><i class="fa fa-shopping-cart text-lg text-center" >&nbsp;&nbsp;&nbsp;Add to cart</i></a>
+                        <i class="fa fa-heart " style="font-size:25px"></i>
                     </div>
                 </div>
             </div>
@@ -254,74 +54,78 @@
             
         </div>
     </div>
-    <div class="aboutUs">
-        <div class="banner-text">
-            <img src="/images/women-in-saree-cover.jpg" alt="" srcset="">
-            <div style="    margin: 5% 0% 0% 0%;color: white;">
-                <h1 style="margin-top: 0%;">About Us</h1>
-                <p>At Vibha Stree, we are passionate about celebrating the rich cultural heritage and timeless beauty of ethnic clothing. Founded with a vision to bring the essence of traditional attire to the modern wardrobe, we offer a wide range of beautifully crafted garments that reflect the vibrant and diverse tapestry of our culture. <br><br>
+    <div class="w-full mt-4">
+        <div class="bg-blue-800 bg-gradient-to-r from-blue-900 to-red-600  my-20 justify-center flex">
+            <img class="w-1/2 " src="/images/women-in-saree-cover.jpg" alt="" srcset="">
+            <div class="mt-10 text-white">
+                <h1 class="font-serif text-5xl text-center" >About Us</h1>
+                <p class="p-10 text-base text-center font-serif" >At Vibha Stree, we are passionate about celebrating the rich cultural heritage and timeless beauty of ethnic clothing. Founded with a vision to bring the essence of traditional attire to the modern wardrobe, we offer a wide range of beautifully crafted garments that reflect the vibrant and diverse tapestry of our culture. <br><br>
 
                 Our collection features an exquisite array of sarees, lehengas, kurtas, and more, each piece meticulously designed and crafted by skilled artisans. We believe that every garment tells a story, and our commitment to quality and craftsmanship ensures that you receive nothing but the finest. <br><br>
             </div>
         </div>
     </div>
-    <div class="gallery">
-        <h1>Gallery</h1>
-        <div class="gallery-images">
-            <div>
-                <img src="/images/default.png" alt="gallery-image" srcset="">
+    <div class="m-10">
+        <h1 class="m-10 mt-20 mb-20 font-serif text-5xl text-center">Gallery</h1>
+        <div class="flex flex-wrap justify-between">
+            <div class="m-5 justify-center">
+                <img class="h-64 w-80 rounded-xl" src="/images/default.png" alt="gallery-image" srcset="">
             </div>
-            <div>
-                <img src="/images/default.png" alt="gallery-image" srcset="">
+            <div class="m-3 justify-center">
+                <img class="h-64 w-80 rounded-xl" src="/images/default.png" alt="gallery-image" srcset="">
             </div>
-            <div>
-                <img src="/images/default.png" alt="gallery-image" srcset="">
+            <div class="m-3 justify-center">
+                <img class="h-64 w-80 rounded-xl" src="/images/default.png" alt="gallery-image" srcset="">
+            </div>
+            <div class="m-3 justify-center">
+                <img class="h-64 w-80 rounded-xl" src="/images/default.png" alt="gallery-image" srcset="">
             </div>
         </div>
     </div>
-    <div class="review">
-        <div class="caraousal">
-            <h4>Name</h4>
-            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Neque minima ullam excepturi repellat itaque sequi amet dolores, doloremque beatae reprehenderit quis dicta iusto et nisi debitis. Incidunt, quas. Ratione, quia!  
+    <div class="my-20 h-3/4  bg-white bg-cover" style="background: url('/images/Reviews-banner.jpg');">
+        <div class="mt-20 py-32 px-20 h-full text-wrap flex-wrap float-right w-1/2">
+            <h4 class="font-bold text-2xl">Name</h4>
+            <p class="font-bold">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Neque minima ullam excepturi repellat itaque sequi amet dolores, doloremque beatae reprehenderit quis dicta iusto et nisi debitis. Incidunt, quas. Ratione, quia!  
             </p>            
         </div>
     </div>
-    <div class="contactUs">
-        <h1>Contact Us</h1>
-        <div class="form">
-            <form class="contactForm" action="/contactUs" method="post" >
-                <div class="form-group">
-                    <label for="name">Name</label>
-                    <input type="text" id="name" 
+    <div class="mt-10 ">
+        <h1 class="mb-20 font-serif text-5xl text-center flex w-full justify-center">Contact Us</h1>
+        <div class="bg-[linear-gradient(90deg,_rgba(238,174,202,1)_0%,_rgba(148,187,233,1)_100%)]
+        mt-10 p-10 font-serif justify-center  flex">
+            <form class="m-10 w-1/2" action="/contactUs" method="post" >
+                <div class="form-group mb-4 ">
+                    <label class="block m-2 font-bold text-gray-700" for="name">Name</label>
+                    <input class="w-full p-3 border-solid rounded-sm box-border text-base focus:outline-none focus:shadow-xl" type="text" id="name" 
                            name="name" 
                            placeholder="Your Name" required>
-                    <span class="error-message" id="nameError"></span>
+                    <span class="text-red-600 text-sm hidden" id="nameError"></span>
                 </div>
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" id="email" 
+                <div class="form-group mb-4 ">
+                    <label class="block m-2 font-bold text-gray-700" for="email">Email</label>
+                    <input class="w-full p-3 border-solid rounded-sm box-border text-base focus:outline-none focus:shadow-xl" type="email" id="email" 
                            name="email" 
                            placeholder="Your Email" required>
-                    <span class="error-message" id="emailError"></span>
+                    <span class="text-red-600 text-sm hidden" id="emailError"></span>
                 </div>
-                <div class="form-group">
-                    <label for="phone">Phone</label>
-                    <input type="tel" id="phone" 
+                <div class="form-group mb-4 ">
+                    <label class="block m-2 font-bold text-gray-700" for="phone">Phone</label>
+                    <input class="w-full p-3 border-solid rounded-sm box-border text-base focus:outline-none focus:shadow-xl" type="tel" id="phone" 
                            name="phone" 
                            placeholder="Your Phone Number" required>
-                    <span class="error-message" id="phoneError"></span>
+                    <span class="text-red-600 text-sm hidden" id="phoneError"></span>
                 </div>
-                <div class="form-group">
-                    <label for="message">Message</label>
-                    <textarea id="message" 
+                <div class="form-group mb-4 ">
+                    <label class="block m-2 font-bold text-gray-700" for="message">Message</label>
+                    <textarea class="resize-y w-full p-3 border-solid rounded-sm box-border text-base  focus:outline-none focus:shadow-xl" id="message" 
                               name="message" 
                               placeholder="Your Message" 
                               rows="5" required></textarea>
-                    <span class="error-message" 
+                    <span class="text-red-600 text-sm hidden" 
                           id="messageError"></span>
                 </div>
                 <button type="submit" 
-                        class="submit-button">
+                        class="bg-blue-500 text-white border-none rounded text-xl cursor-pointer w-full p-3">
                   Send Message
                 </button>
             </form>

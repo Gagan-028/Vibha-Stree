@@ -8,6 +8,7 @@ const adminController = require("../controllers/adminController")
 
 router.get("/",adminController.adminIndexPage);
 router.get("/createProducts",adminController.createProducts);
+router.get("/createCoupons", adminController.createCoupons)
 
 
 module.exports = router;
