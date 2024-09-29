@@ -21,5 +21,6 @@ router.post("/saveAddress",ensure.isAlreadyLoggedIn,userController.saveAddress);
 router.delete("/profile/deleteAddress/:userId/:addressId",ensure.isAlreadyLoggedIn,userController.deleteAddress);
 router.get("/deleteAccount/:userId",ensure.isAlreadyLoggedIn,userController.deleteAccount);
 router.post("/contactUs",ensure.isAlreadyLoggedIn,userController.contactUs);
+// router.get("/contactUsReply",ensure.isAlreadyLoggedIn,userController.contactUsReply);
 
 module.exports = router;

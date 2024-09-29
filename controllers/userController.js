@@ -226,5 +226,45 @@ module.exports ={
                     }
                 }
             sendMail(transporter,mailOptions);
-    }
+    },
+    // contactUsReply : async (req,res) => {
+    //     console.log(req.body);
+        
+    //         let {name,email,phone,message} = req.body
+    //         const transporter = nodemailer.createTransport({
+    //             service : 'gmail',
+    //             host: 'smtp.gmail.com',
+    //             port: 587,
+    //             secure: false,
+    //             auth: {
+    //                 user: process.env.USER, 
+    //                 pass: process.env.APP_PASSWORD
+    //             }
+    //         });
+            
+    //         const mailOptions = {
+        
+    //                 from :process.env.USER,
+    //                 to: email,
+    //                 subject: "Thank you for reaching out to us!",
+    //                 phone: phone, 
+    //                 text: "Thank you for reaching out to us!. We will get back to you shortly",
+    //                 replyTo : email
+
+    //           };
+    //     console.log("mailOptions",mailOptions);
+        
+    //         const sendMail = async (transporter,mailOptions) => {
+    //               try {
+    //                   await transporter.sendMail(mailOptions);
+    //                   console.log("Email sent successfully");
+    //                   res.redirect("/");
+                      
+    //                 } catch (error) {
+    //                     console.error("Error sending email:", error);
+    //                     res.status(500).send("Failed to send email");
+    //                 }
+    //             }
+    //         sendMail(transporter,mailOptions);
+    // }
 }

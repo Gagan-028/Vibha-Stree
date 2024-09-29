@@ -39,12 +39,11 @@
         <div class="overflow-x-auto mt-10 flex content-between">
             <% products.slice(0, 5).forEach((products)=> { %>
             <div class="m-5 mb-5 shadow-lg" href="/product/:id">
-                <img class="size-64" src="data:image/jpeg;base64,<%= products.image.toString('base64') %>"alt="" srcset=""/>
+                <img class="size-64 max-sm:size-44 " src="data:image/jpeg;base64,<%= products.image.toString('base64') %>"alt="" srcset=""/>
                 <div>
                     <h4 class="overflow-hidden whitespace-nowrap text-ellipsis max-w-52 font-bold"><%= products.name%></h4>
                     <h4 class="font-bold">₹ <%= products.price%></h4>
-                    <div class="text-left m-3 flex 
-                    justify-between pt-5">
+                    <div class="text-left m-3 flex justify-between pt-5">
                         <a class=" text-black no-underline text-center p-3 bg-blue-500 border-none rounded-md text-base" href="/addToCart/<%= products._id %>" type="submit"><i class="fa fa-shopping-cart text-lg text-center" >&nbsp;&nbsp;&nbsp;Add to cart</i></a>
                         <i class="fa fa-heart " style="font-size:25px"></i>
                     </div>
