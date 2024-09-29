@@ -1,131 +1,107 @@
 <%- include('./header') %>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <style>
-  body{
-    margin: 0%;
-    width: 100%;
-  }
-  a {
-    padding: 3px;
-    color: black;
-    text-decoration: none;
-  }
-  .mycart{
-    display: flex; 
-    flex-direction: row;
-    margin-bottom: 0%;
-  }
-  table{
-    padding: auto;
-  }
-  .product-image{
-    width: 40%;
-    padding-left:150px;
-    padding-right: 0%;
-    padding-top:5%;
-  }
-  .product-image img{
-    width: 300px;
-    height: 300px;
-  }
-  .product-detail{
-    padding-top:5%;
-  }
-  .product-detail table{
-    padding: 0%;
-  }
-  .product-detail h1{
-      padding: 10px;
-      text-align: left;
-      padding-right: 150px;
-  }
-  .product-detail th,td,h1{
-    text-align: left;
-  }
-  .orderButton{
-    border-radius: 100%;
-    border: none;
-    font-size: 15px;
-    height: 20px;
-    width: 20px;
-    background-color: black;color: white;
-  }
-  input::-webkit-outer-spin-button,
-  input::-webkit-inner-spin-button {
-    /* -webkit-appearance: none; */
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
     margin: 0;
-  }
-  .cartTotal{
-    padding-right: 150px;
-  }
-  .placeOrder{
-    display: block;
-    border-radius: 10px;
-    border: none;
-    align-content: center;
-    text-align: center;
-    font-size: 30px;
-    height: 50px;
-    width: inherit;
-    background-color: #5800f4;
-    color: white;
   }
       
 </style>
 <body>
-    <div style="margin-bottom: 5%;">
-      <h1 style="text-align: center;padding-right:0%">Shopping Cart</h1>
-      <hr style="width: 90%; border: 2px solid black;">
-      <% if (user.cart.length > 0) { 
-        var totalMRP = 0;
-        var totalDiscount = 0;
-        var totalAmount = 0;
-      %>
-        <% user.cart.forEach((product) => {
-          totalMRP += product.price;
-          totalDiscount += product.discount;
-          totalAmount += product.price - product.discount + 100;
-        }) %>
-        <% user.cart.sort((a) =>  -a.createdAt) %>
-        <% user.cart.forEach((product) => { %>
-          <div class="mycart">
-            <div class="product-image">                
-              <img src="data:image/jpeg;base64,<%= product.image.toString('base64') %>" alt="" />
-              <div class="content" style="display: flex; flex-direction: row;">
-                <div class="detail">
-                  <h3 style="margin-bottom: 0%;"> <%= product.name %></h3>
-                </div>
-                <div style="height: 20px; align-self: self-end; margin-left: 110px;">
-                  <!-- <button class="orderButton">-</button>
-                  <input style="text-align: center;" type="number" min="1" max="20">
-                  <button class="orderButton">+</button>  -->
-                </div>                    
-              </div> 
+    <div class="flex justify-center px-20 my-16 w-10/12">
+      <div class="w-3/4 mb-10 px-10" >
+        <div class="flex py-10 justify-between">
+          <h1 class="text-3xl  font-bold ">Shopping Cart</h1>
+          <span class="font-bold text-xl content-end"><% if(user.cart.length>1){ %>
+            <%=user.cart.length %> Items
+          <% } else{ %>
+            <%=user.cart.length %> Item
+          <% } %></span> 
+        </div>
+        <hr class="w-full border-solid border border-black">
+        <% if (user.cart.length > 0) { 
+          var totalMRP = 0;
+          var totalDiscount = 0;
+          var totalAmount = 0;
+          var coupon = 0;
+          var platformFee = 100;
+        %>
+          <% user.cart.forEach((product) => {
+            subTotal =+ product.price * product.quantity
+
+            totalMRP += subTotal;
+            totalDiscount += product.discount;
+            totalAmount = totalMRP + - coupon - totalDiscount + platformFee * 10/100 ;
+          }) %>
+          <% user.cart.sort((a) =>  -a.createdAt) %>
+          <% user.cart.forEach((product) => { %>
+           <div class="flex  py-10 w-full   items-center">
+            <img class="h-48 w-44 rounded" src="data:image/jpeg;base64,<%= product.image.toString('base64') %>" alt="" srcset="">
+            <div class="w-1/2 pl-14">
+              <h3 class="text-xl font-semibold font-custom-sans" ><%= product.name %></h3>
+              <h4 class="text-lg"><%= product.category %></h4>
+              <h4 class="text-lg ">₹<%= product.price %></h4> 
             </div>
-            <div class="product-detail">
-              <table>
-                <tr>
-                  <th>MRP</th>
-                  <td>₹ <%= product.price %></td>
-                </tr>
-                <tr>
-                  <th>Discount</th>
-                  <td>₹ <%= product.discount %></td>
-                </tr>
-                <tr>
-                  <th>Shipping Fee</th>
-                  <td>FREE</td>
-                </tr>
-                <tr>
-                  <th>Sub Total</th>
-                  <td>₹ <%= product.price - product.discount + 100 %></td>
-                </tr>
-              </table>
-            </div>
+            <form class="w-3/4 m-0 text-center ">
+              <div class="content-evenly hover:cursor-pointer inline-block border rounded-sm border-solid m-0 w-10 h-10 text-center align-middle  bg-slate-400 " id="decrease" onclick="decreaseValue()" value="Decrease Value">-</div>
+              <input class="text-center  m-0 w-10 h-10 focus:outline-none border-y-2 " type="number" id="number" value="<%= product.quantity %>" />
+              <div class="content-evenly hover:cursor-pointer inline-block border rounded-sm border-solid m-0 w-10 h-10 text-center align-middle  bg-slate-400 " id="increase" onclick="increaseValue()" value="Increase Value">+</div>
+            </form>
+            <b class="text-xl w-28">₹<%= product.price*product.quantity %></b>
+           </div>
+          <% }) %>
+        <% } else { %>
+          
+        <% } %>
+
+      </div>
+      <div class="w-1/3 pr-14">
+      <% if (user.cart.length > 0) { %>
+        <div class="w-full ">
+          <!-- <h1>Total (<%= user.cart.length %> item<%= user.cart.length > 1 ? 's' : '' %>): ₹<%= totalAmount %></h1> -->
+          <h1 class="text-3xl py-10 font-bold">Order Summary</h1>
+          <hr class="w-full border-solid border border-black">
+          <div class="py-10">
+            <form action="/applyCoupon" method="post">
+              <i class="fa fa-tag" style="font-size: 25px;"></i>
+              <input class=" mx-3 focus:outline-none border-black border-b-2" type="text" name="coupon" id="coupon" placeholder="Apply Coupon">
+            <button class="float-right font-semibold border-black border-2 px-5 p-1 " href="">Apply</button>
+            </form>
           </div>
-        <% }) %>
-      <% } else { %>
-        <div style="margin: 4%;">
-          <h1>Your Cart is empty.....</h1>
+          <div class="py-10">
+            <span>PRICE DETAILS (<% if(user.cart.length>1){ %>
+              <%=user.cart.length %> Items
+            <% } else{ %>
+              <%=user.cart.length %> Item
+            <% } %>)</span>
+            <table class="w-full ">
+              <tr class="leading-7" >
+                <td class="font-semibold float-left" >MRP</td>
+                <td class="float-right" >₹<%= totalMRP %></td>
+              </tr>
+              <tr class="leading-7" >
+                <td class="font-semibold float-left" >Discount on MRP</td>
+                <td class="float-right" >₹<%= totalDiscount %></td>
+              </tr>
+              <tr class="leading-7" >
+                <td class="font-semibold float-left" >Platform Fee</td>
+                <td class="float-right" >₹<%= platformFee %></td>
+              </tr>
+              <tr class="leading-7" >
+                <td class="font-semibold float-left" >Shipping Fee</td>
+                <td class="float-right" >FREE</td>
+              </tr>
+            </table>
+            <hr class="w-full ">
+          </div>
+          <div class="flex justify-between py-10">
+            <span class="font-semibold float-left">Total Amount</span> 
+            <span class="font-semibold float-right">₹<%= totalAmount %></span>
+          </div>
+          <button class="w-full bg-blue-700 p-4 text-white" type="submit">
+            PLACE ORDER
+          </button>
         </div>
       <% } %>
     </div>
@@ -133,8 +109,23 @@
     <% if (user.cart.length > 0) { %>
       <div class="cartTotal" style="float: right; margin-bottom: 10%; ">
         <h1>Total (<%= user.cart.length %> item<%= user.cart.length > 1 ? 's' : '' %>): ₹ <%= totalAmount %></h1>
-        <a href="" class="placeOrder">Place Order</a>
       </div>
     <% } %>
     
-        </body>
+</body>
+<script>
+  function increaseValue() {
+  var value = parseInt(document.getElementById('number').value, 10);
+  value = isNaN(value) ? 0 : value;
+  value++;
+  document.getElementById('number').value = value;
+}
+
+function decreaseValue() {
+  var value = parseInt(document.getElementById('number').value, 10);
+  value = isNaN(value) ? 0 : value;
+  value < 1 ? value = 1 : '';
+  value--;
+  document.getElementById('number').value = value;
+}
+</script>

@@ -1,3 +1,4 @@
+const { default: mongoose } = require('mongoose');
 const mongooose = require('mongoose');
 const userSchema = mongooose.Schema({
     fullname : String,
@@ -10,10 +11,12 @@ const userSchema = mongooose.Schema({
         type : mongooose.Schema.Types.ObjectId,
         ref:"userAddress",
     }],
-    cart : [{
-        type : mongooose.Schema.Types.ObjectId,
-        ref:"product",
-    }],
+    cart: [
+        {
+            product: { type: mongoose.Schema.Types.ObjectId, ref: 'Product' },
+            quantity: { type: Number, default: 1 }
+        }
+    ],
     isAdmin : Boolean,
     orders : {
         type : Array,
