@@ -10,7 +10,8 @@ const productSchema = mongooose.Schema({
     discount : {
         type : Number,
         default : 0,
-    }
+    },
+    keywords : [{type:String}]
 }, 
 { timestamps: true });
 

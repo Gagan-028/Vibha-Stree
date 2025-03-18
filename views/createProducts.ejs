@@ -1,147 +1,149 @@
 <%- include('./header') %>
-    <style>
-      body {
-        margin: 0px;
-      }
-      .container{
-        display: flex;
-      }
-      .sidebar {
-          font-family:Verdana, Geneva, Tahoma, sans-serif;
-          font-weight: bold;
-          background-color: #B2B5E0;
-      }
-      .collection {
-        display: flex;
-        flex-direction: column;
-        padding: 50px;
-      }
-      a {
-        padding: 3px;
-        color: black;
-        text-decoration: none;
-      }
-      .products {
-        font-family:Verdana, Geneva, Tahoma, sans-serif;
-        font-weight: bold;
-        width:100%;
-        background-color:#cccde3;
-        padding: 5%;
-      }
-      .items{
-        /* margin: 5%; */
-        padding: 4rem 0;
-        
-        /* width: 90%; */
-        /* max-width: 60rem; */
-      }
-      .items form {
-        box-sizing: border-box;
-        padding: 2rem;
-        border-radius: 1rem;
-        background-color: hsl(0, 0%, 59%);
-        border: 4px solid hsl(0, 0%, 90%);
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 2rem;  
-      }
-      input{
-        width: 250px;
-        padding: 10px;
-        border-radius: 5px;
-        border: none;
-      }
-      .panel button{
-        min-width: fit-content;
-        padding: 13px;
-        background-color:#C5ADC5;
-        border-radius: 5px;
-        border: none;
-        font-weight: bold;
-        color: white;
-      }
-      select{
-        padding: 5px 10px 5px 10px;
-        width: fit-content;
-        appearance: none;
-        font-size: 1.15rem;
-        background-color: #fff;
-        border: 1px solid #caced1;
-        border-radius: 0.25rem;
-        color: #000;
-        cursor: pointer;
-      }
-      option{
-        padding: 5px;
-      }
-      form button{
-        padding: 10px;
-        width: 200px;
-        align-items: center;
-        border-radius: 10px;
-        border:none;
-      }
-    </style>
-  
-  <body>
-    <div class="container">
-      <div class="sidebar">
-        <div class="collection">
-            <a href="">All Products</a>
-            <a href="">Create new products</a>
-            <a href="/admin/createCoupons">Create Coupon</a>
-        </div>
+<style>
+  .tag-span {
+    display: inline-block;
+    background-color: #e0e0e0;
+    border-radius: 3px;
+    padding: 5px;
+    margin: 5px;
+    font-size: 14px;
+  }
+  .remove-button {
+    margin-left: 10px;
+    font-size: 12px;
+    cursor: pointer;
+    color: black;
+    font-weight: bold;
+  }
+</style>
+<body>
+  <div class="flex">
+    <div class="font-verdana font-semibold bg-slate-100">
+    <div class="flex flex-col p-12">
+      <a class="p-1 text-black no-underline" href="">All Products</a>
+      <a class="p-1 text-black no-underline" href="">Create new products</a>
+      <a class="p-1 text-black no-underline" href="/admin/createCoupons">Create Coupon</a>
+    </div>
     </div>
     <div class="font-verdana font-semibold w-3/4 bg-white p-28">
-      <h1 class="font-custom-sans text-4xl p-20">Create New Product</h1>
+      <h1 class="font-custom-sans text-4xl ">Create New Product</h1>
       <div class="p-16">
-         <form class="box-border border-black p-8 rounded-xl bg-slate-400 border-2 border-solid grid grid-cols-3 gap-y-4" id="productForm" action="/product/create" method="post" enctype="multipart/form-data">
-          <label for="file">Upload Image</label>
+        <form class="box-border border-black p-8 rounded-xl bg-white border-2 border-solid grid grid-cols-2 h-fit gap-y-4" id="productForm" action="/product/create" method="post" enctype="multipart/form-data">
+          <label class="self-center" for="file">Upload Image</label>
           <input class="border-black border  w-64 p-3 rounded-md " type="file" name="image" id="image">
-          <br><label for="name">Enter Name</label>
+          
+          <label class="self-center" for="name">Enter Name</label>
           <input class="border-black border w-64 p-3 rounded-md " type="text" name="name" id="name" placeholder="Product Name">
-          <br><label for="price">Enter Price</label>
+          
+          <label class="self-center" for="price">Enter Price</label>
           <input class="border-black border w-64 p-3 rounded-md " type="text" name="price" id="price" placeholder="Product Price">
-          <br><label for="price">Enter Discount</label>
+          
+          <label class="self-center" for="discount">Enter Discount</label>
           <input class="border-black border w-64 p-3 rounded-md " type="text" name="discount" id="discount" placeholder="Discount Price">
-          <br><label>Choose Category</label>
-          <select class="p-4 w-fit appearance-none text-sm bg-white border-solid border-2 border-black  rounded text-black cursor-pointer" name="category" id="category">
+          
+          <label class="self-center">Choose Category</label>
+          <select class="p-3 w-fit appearance-none text-sm bg-white border-solid border-2 border-black  rounded text-black cursor-pointer" name="category" id="category">
             <option class="p-4" value="default">Choose a category</option>
             <option class="p-4" value="Salwar Suits">Salwar Suits</option>
             <option class="p-4" value="Saree">Saree</option>
             <option class="p-4" value="Kurtis">Kurtis</option>
             <option class="p-4" value="Ethnic Wear">Ethnic Wear</option>
-          </select><br>
-          <button class=" p-3 w-64 items-center rounded-lg border bg-blue-700 text-white" type="submit">Create Product</button>
+          </select>
+          
+          <label class="self-center" for="tags">Enter Tags</label>
+          <input class="border-black border w-64 p-3 rounded-md " type="text" name="tags" placeholder="Enter Tags" id="tags">
+          <div id="tag-container"></div>
+          <input type="hidden" name="keywords" id="tagValue">
+          <button class="p-3 w-64 items-center rounded-lg border h-16 bg-blue-700 text-white" type="submit">Create Product</button>
         </form>
       </div>
-  </div>
     </div>
-  </body>
-  <script>
-     
-    document.getElementById('productForm').addEventListener('submit', async function(event) {
-      event.preventDefault(); 
-      const form = event.target;
-      const formData = new FormData(form);
+  </div>
+</body>
 
-    try {
-        const response = await fetch('/product/create', {
-            method: 'POST',
-            body: formData
-        });
-    const result = await response.json();
-    if (result.success) {
-            // Reload the window after successful creation
-            window.location.reload();
-        } else {
-            // Handle the error
-            console.error('Error creating product:', result.message);
+<script>
+  var input = document.getElementById("tags");
+  var tagContainer = document.getElementById("tag-container");
+  var tagValue = document.getElementById("tagValue");
+  var tagsArray = []; 
+  var maxTags = 10;
+  input.addEventListener("keypress", function(e) {
+      if (e.key === "Enter") {
+          e.preventDefault(); 
+          let newTag = input.value.trim(); 
+          if (newTag && !tagsArray.includes(newTag)){ 
+            if (tagsArray.length < maxTags) { 
+              tagsArray.push(newTag); 
+              addTagToUI(newTag); 
+              updateTagValue();
+              input.value = ''; 
+            }else{
+              alert("You can only add up to " + maxTags + " tags.");
+            }
+          }
+      }
+  });
+
+  function addTagToUI(tag) {
+      let tagSpan = document.createElement('span');
+      tagSpan.classList.add('tag-span'); 
+      tagSpan.innerText = tag;
+
+      // Remove button 
+      let removeButton = document.createElement('span');
+      removeButton.innerHTML = '<i class="fa-solid fa-x"></i>'; 
+      removeButton.classList.add('remove-button'); 
+      removeButton.onclick = function() {
+          removeTag(tag); 
+      };
+
+      
+      tagSpan.appendChild(removeButton);
+
+      
+      tagContainer.appendChild(tagSpan);
+  }
+
+  // Function to remove a tag
+  function removeTag(tag) {
+      let index = tagsArray.indexOf(tag);
+      if (index > -1) {
+          tagsArray.splice(index, 1); 
+          updateTagValue(); 
+          renderTags(); 
+      }
+  }
+
+  // Function to update the hidden input field
+  function updateTagValue() {
+      tagValue.value = tagsArray.join(", ");
+  }
+
+  // Function to re-render the tag container
+  function renderTags() {
+      tagContainer.innerHTML = ''; 
+      tagsArray.forEach(tag => {
+          addTagToUI(tag); 
+      });
+  }
+</script>
+  <!-- <script>
+    var input = document.getElementById("tags");
+    var tagValue = document.getElementById("tagValue");
+    var tagsArray = []; 
+
+    input.addEventListener("keypress", function(e) {
+      if (e.key === "Enter") {
+        e.preventDefault(); 
+        let newTag = input.value.trim(); 
+        if (newTag) {
+          tagsArray.push(newTag); 
+          input.value = ''; 
+          tagValue.value +=  input.value
         }
-    } catch (error) {
-        console.error('Error:', error);
-    }
-});
+        tagValue.value = tagsArray.join(", ");
+      }
+    });
 
-  </script>
-
+  </script> -->
+ 

@@ -17,7 +17,7 @@ const userSchema = mongooose.Schema({
             quantity: { type: Number, default: 1 }
         }
     ],
-    isAdmin : Boolean,
+    isAdmin : { type: Boolean, default: false },
     orders : {
         type : Array,
         default:[]

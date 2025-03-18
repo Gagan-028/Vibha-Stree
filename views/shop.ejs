@@ -32,11 +32,11 @@
       </div>
       <div class="font-custom-sans font-bold p-10 flex flex-row flex-wrap w-full">
         <% products.forEach((product) => { %>
-          <div class="items transition duration-300 w-1/5 max-h-85 m-0 p-5  relative shadow-lg">
+          <div class="items transition duration-300 h-96 w-1/5 m-0 p-5  relative shadow-lg">
               <div class="bg-white m-0 relative">
                   <img class="h-64 w-36" src="data:image/jpeg;base64,<%= product.image.toString('base64') %>" alt="" style="width: 100%" />
-                  <div class="cartLike hidden h-16 w-full bg-white  absolute  -bottom-1 z-2 text-center justify-between items-center">
-                    <a class="addCart text-right h-10 p-2 w-3 font-custom-sans bg-blue-500 border-none rounded-md text-sm content-around" href="/addToCart/<%= product._id %>" type="submit"><i class="fa fa-shopping-cart text-base text-center">&nbsp;&nbsp;&nbsp;Add to cart</i></a>
+                  <div class="cartLike hidden h-16 w-full bg-white  absolute  -bottom-1 z-20 text-center justify-between items-center">
+                    <a class="addCart text-right h-10 p-2 w-36 font-custom-sans bg-blue-500 border-none rounded-md text-sm content-around" href="/addToCart/<%= product._id %>" type="submit"><i class="fa fa-shopping-cart text-center text-sm">&nbsp;&nbsp;&nbsp;Add to cart</i></a>
                     <a href=""><i class="fa fa-heart " style="font-size:25px"></i></a>
     
                   </div>
