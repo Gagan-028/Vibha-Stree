@@ -1,17 +1,17 @@
 const express = require('express');
 const router = express.Router();
-const ensure = require("../middlewares/isAlreadyLoggedIn")
+const ensure = require("../middlewares/middleware")
 const flash = require('connect-flash'); 
 const userController = require('../controllers/userController');
-isAlreadyLoggedIn = require('../middlewares/isAlreadyLoggedIn');
+isAlreadyLoggedIn = require('../middlewares/middleware');
 const productModel = require('../models/product-model');
-const userModel = require('../models/user-model');
+const userModel = require('../models/userModel');
 
 router.get("/",userController.indexPage);
 router.get("/profile",ensure.isAlreadyLoggedIn,userController.userProfile);
 router.get("/products" ,userController.getProducts);
 router.get("/cart",ensure.isAlreadyLoggedIn,userController.viewCart);
-router.post('/product-display', userController.searchProduct);
+router.post('/search', userController.searchProduct);
 router.get('/products/:category',  userController.viewCategory);
 router.get('/profile/edit',ensure.isAlreadyLoggedIn,userController.getProfileEdit);
 router.post('/profile/edit',ensure.isAlreadyLoggedIn,userController.postProfileEdit);
