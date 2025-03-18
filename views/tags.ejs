@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <title>Document</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        :root {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.tags-input {
+    border: 1px solid #333;
+    display: inline-block;
+}
+
+.tags-input .tag {
+    font-size: 85%;
+    padding: 0.5em 0.75em;
+    margin: 0.25em 0.1em;
+    display: inline-block;
+    background-color: #ddd;
+    transition: all 0.1s linear;
+    cursor: pointer;
+}
+
+.tags-input .tag:hover {
+    background-color: #3af;
+    color: white;
+}
+
+.tags-input .tag .close::after {
+    content: '×';
+    font-weight: bold;
+    display: inline-block;
+    transform: scale(1.4);
+    margin-left: 0.75em;
+}
+
+.tags-input .tag .close:hover::after {
+    color: red;
+}
+
+.tags-input .main-input {
+    border: 0;
+    outline: 0;
+    padding: 0.5em 0.1em;
+}
+
+    </style>
+</head>
+<body>
+    <input class="border-black border-2" type="text" name="tags" placeholder="tags" id="tags" onsubmit="" multiple>
+    <form action="/keywords" method="post">
+        <label for="tags">Enter tags</label>
+        <input class="border-black border-2" type="text" name="tags" id="tagValue" placeholder="tags" hidden  id="tags" onsubmit="" multiple>
+        <button class="p-5 bg-blue-700" type="submit">Submit</button>
+    </form>
+</body>
+</html>
+<script>
+    var input = document.getElementById("tags");
+    var tagValue = document.getElementById("tagValue");
+    var tagsArray = []; // Array to store the tags
+
+input.addEventListener("keypress", function(e) {
+    if (e.key === "Enter") {
+        e.preventDefault(); // Prevent form submission or other default actions
+
+        let newTag = input.value.trim(); // Get the input value and remove extra spaces
+
+        if (newTag) {
+            tagsArray.push(newTag); // Add the new tag to the array
+            input.value = ''; // Clear the input field
+            alert("Tag added: " + newTag);
+        }
+
+        // Update the hidden input field (optional)
+        tagValue.value = tagsArray.join(", ");
+    }
+});
+
+</script>

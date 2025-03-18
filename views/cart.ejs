@@ -5,10 +5,11 @@ input[type=number]::-webkit-inner-spin-button,
 input[type=number]::-webkit-outer-spin-button {
     -webkit-appearance: none;
     margin: 0;
-}
+  }
+      
 </style>
 <body>
-    <div class="flex justify-center px-20 my-16 w-10/12">
+    <div class="flex justify-center px-20 my-16 ">
       <div class="w-3/4 mb-10 px-10" >
         <div class="flex py-10 justify-between">
           <h1 class="text-3xl  font-bold ">Shopping Cart</h1>
@@ -69,7 +70,7 @@ input[type=number]::-webkit-outer-spin-button {
             </form>
           </div>
           <div class="py-10">
-            <span>PRICE DETAILS (<% if(user.cart.length>1){ %>
+            <span class="font-semibold">PRICE DETAILS (<% if(user.cart.length>1){ %>
               <%=user.cart.length %> Items
             <% } else{ %>
               <%=user.cart.length %> Item
@@ -103,8 +104,8 @@ input[type=number]::-webkit-outer-spin-button {
           </button>
         </div>
       <% } %>
-      </div>
     </div>
+   
     
 </body>
 <script>

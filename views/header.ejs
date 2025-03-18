@@ -9,7 +9,7 @@
 <body>
   <nav class="flex drop-shadow-2xl justify-between max-sm:justify-around items-center bg-white w-full  max-sm:h-20">
     <a href="/" class="m-0"><img class="m-0 h-20 w-100 max-sm:w-36 max-sm:h-16" src="/images/vibha-stree.png" alt="image" srcset=""></a>
-    <form action="/product-display" method="post" class=" flex-grow flex justify-center m-0 max-sm:hidden">
+    <form action="/search" method="post" class=" flex-grow flex justify-center m-0 max-sm:hidden">
         <div class="relative w-96 max-sm:w-20">
             <input type="text" class="max-sm:w-20 w-96 bg-transparent border-t-0 border-r-0 border-l-0 border-b-2 focus:outline-none  rounded-none" placeholder="Search for products and more" name="search">
             <button type="submit" class="absolute right-0 top-0  px-4"><i class="fa fa-search"></i></button>
@@ -19,11 +19,8 @@
         <a class="text-black text-xl pl-8" href="/products">Shop</a>
         <a class="text-black text-xl pl-8" href="/cart">Cart</a>
         <a class="text-black text-xl pl-8" href="/profile">Profile</a>
-        <% if (isAlreadyLoggedIn) { %>      
-          <a href="/login" class="logoutButton w-40 h-20 bg-blue-600 p-3 rounded-md text-white text-xl m-6">Login</a>
-          <% } else { %>
-            <a href="/logout" class="logoutButton w-40 h-20 bg-blue-600 p-3 rounded-md text-white text-xl m-6">Logout</a>
-        <% } %>
+        <a href="/login" class="logoutButton w-40 h-20 bg-blue-600 p-3 rounded-md text-white text-xl m-6">Login</a>
+
     </div>
     
 
@@ -72,6 +69,7 @@
         dropdownMenu.style.display = 'block';
     }
   });
+  
 
 
 </script>

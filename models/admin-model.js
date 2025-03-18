@@ -6,6 +6,12 @@ const adminSchema = mongooose.Schema({
     fullname : String,
     email : String,
     password : String,
+    gender : String,
+    dob : String,
+    address : [{
+        type : mongooose.Schema.Types.ObjectId,
+        ref:"userAddress",
+    }],
     cart : {
         type : Array,
         default:[]

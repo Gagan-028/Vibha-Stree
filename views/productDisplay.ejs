@@ -1,55 +1,87 @@
-<%- include('./partials/header') %>
+<%- include('./header') %>
+<script src="https://kit.fontawesome.com/474705e991.js" crossorigin="anonymous"></script>
 
-    <% if(success.length>0){ %>
-        <div class="absolute top-5 left-1/2 -translate-x-1/2 -translate-y-1/2 p-3 rounded-md bg-blue-500">
-            <span class="inline-block mt-1 mb-1 text-white">
-                <%= success %>
-            </span>
+<style>
+  .items:hover .cartLike {
+    display: flex; 
+  }
+  .item-detail:hover .nameDisplay{
+    box-shadow: 3px 4px 33px rgba(36, 36, 36, 0.2);
+  }
+</style>
+  <body>  
+    <div class="flex">
+      <div class="font-serif font-bold  bg-gray-300">
+        <div class="p-14">
+          <b>Sort By</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <select name="sortby" id="sortby">
+            <option value="newest">Newest</option>
+            <option value="trending">Trending</option>
+          </select>
         </div>
-        <% } %>
+        <div class="flex flex-col p-14">
+          <a class="p-1 text-black no-underline" id="allCollection">All Collection</a>
+          <a class="p-1 text-black no-underline" id="newCollection">New Collection</a>
+          <a class="p-1 text-black no-underline" >Discounted Collection</a>
+        </div>
+        <div class="p-14 flex flex-col">
+          <a class="p-1 text-black no-underline"  href="">Filter By:</a><br />
+          <a class="p-1 text-black no-underline"  href="">Availability</a>
+          <a class="p-1 text-black no-underline"  href="">Discount</a>
+        </div>
+      </div>
+      <div class="font-custom-sans font-bold p-10 flex flex-row flex-wrap w-full">
+        <% searchedProduct.forEach((searchedProduct) => { %>
+          <div class="items transition duration-300 h-96 w-1/5 m-0 p-5  relative shadow-lg">
+              <div class="bg-white m-0 relative">
+                  <img class="h-64 w-36" src="data:image/jpeg;base64,<%= searchedProduct.image.toString('base64') %>" alt="" style="width: 100%" />
+                  <div class="cartLike hidden h-16 w-full bg-white  absolute  -bottom-1 z-20 text-center justify-between items-center">
+                    <a class="addCart text-right h-10 p-2 w-36 font-custom-sans bg-blue-500 border-none rounded-md text-sm content-around" href="/addToCart/<%= searchedProduct._id %>" type="submit"><i class="fa fa-shopping-cart text-center text-sm">&nbsp;&nbsp;&nbsp;Add to cart</i></a>
+                    <a href=""><i class="fa fa-heart " style="font-size:25px"></i></a>
+    
+                  </div>
+                  <div class="relative z-10 bg-white p-2">
+                      <h5 class="overflow-hidden whitespace-nowrap text-ellipsis max-w-52" style="margin-bottom: 0%;"><%= searchedProduct.name %></h5>
+                      <h5 style="margin: 0%;">₹ <%= searchedProduct.price %></h5>
+                  </div>
+              </div>
+          </div>
+      <% }) %> 
+      </div>
+    </div>
+  </body>
+  <script>
+    // document.getElementById("newCollection").addEventListener("click", function(event) {
+    //     event.preventDefault(); // Prevent the default link behavior
 
-            <div class="min-h-screen flex flex-col">
-                <div class="container px-10 py-20 flex flex-grow">
-                    <div class="w-[25%] flex h-screen flex-col items-start">
-                        <div class="flex flex-col">
-                            <a class="block w-fit mb-2" href="">All Products</a>
-                            <a class="block w-fit mb-2" href="">Create new product</a>
-                        </div>
-                    </div>
-                    <main class="w-3/4 bg-white p-8 shadow ml-4">
-                        <h2 class="text-xl font-bold mb-4">Create New Product</h2>
-                        <form autocomplete="off" action="/products/create" method="post" enctype="multipart/form-data">
-                            <div class="mb-6">
-                                <h3 class="text-lg font-semibold mb-2">Product Details</h3>
-                                <div class="mb-4">
-                                    <label class="block mb-2 font-medium">Product Image</label>
-                                    <input name="image" type="file" class="py-2 px-4 rounded" value="Select File">
-                                </div>
-                                <div class="grid grid-cols-2 gap-4">
-                                    <input name="name" type="text" placeholder="Product Name"
-                                        class="border p-2 rounded w-full">
-                                    <input name="price" type="text" placeholder="Product Price"
-                                        class="border p-2 rounded w-full">
-                                    <input name="discount" type="text" placeholder="Discount Price"
-                                        class="border p-2 rounded w-full">
-                                </div>
-                            </div>
+    //     // Fetch the products for the "New Collection"
+    //     fetch('/products?collection=newCollection')
+    //         .then(response => response.text()) // Assuming your server renders an HTML template
+    //         .then(html => {
+    //             // Replace the product section with the new HTML
+    //             document.querySelector('.products').innerHTML = html;
+    //         })
+    //         .catch(error => {
+    //             console.error('Error fetching new collection:', error);
+    //         });
+    // });
 
-                            <div>
-                                <h3 class="text-lg font-semibold mb-2">Panel Details</h3>
-                                <div class="grid grid-cols-2 gap-4">
-                                    <input name="bgcolor" type="text" placeholder="Background Color"
-                                        class="border p-2 rounded w-full">
-                                    <input name="panelcolor" type="text" placeholder="Panel Color"
-                                        class="border p-2 rounded w-full">
-                                    <input name="textcolor" type="text" placeholder="Text Color"
-                                        class="border p-2 rounded w-full">
-                                </div>
-                            </div>
-                            <input class="px-5 py-2 rounded mt-3 bg-blue-500 text-white" type="submit"
-                                value="Create New Product">
-                        </form>
-                    </main>
-                </div>
-            </div>
-            <%- include('./partials/footer') %>
+    
+//    function addToCart(productId) {
+//     $.ajax({
+//         type: "POST",
+//         url: `/addToCart/${productId}`, // Correct URL format
+//         data: JSON.stringify({ productId: productId }),
+//         contentType: "application/json",
+//         dataType: "json",
+//         encode: true,
+//     }).done(function (data) {
+//         // Handle success, e.g., change button style
+//         var addToCart = document.getElementById('addToCart' + productId);
+//         addToCart.classList.toggle('clicked');
+//     }).fail(function (error) {
+//         alert("Failed to add to cart");
+//     });
+// }
+
+  </script>

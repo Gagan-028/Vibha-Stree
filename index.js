@@ -13,7 +13,7 @@ const flash = require('connect-flash');
 const expressSession = require('express-session'); 
 const nodemailer = require("nodemailer");
 let alert = require('alert'); 
-
+const ensure = require('./middlewares/middleware')
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 app.use(cookieParser());
@@ -29,7 +29,7 @@ app.set("view engine","ejs");
 
 // ------------------> DATABASE <------------------------
 
-const userModel = require('./models/user-model');
+const userModel = require('./models/userModel');
 const productModel = require('./models/product-model');
 const adminModel = require('./models/admin-model');
 
@@ -42,7 +42,7 @@ const { log } = require('console');
 const { hash } = require('crypto');
 const { loadavg } = require('os');
 const { generateToken } = require('./utils/generateTokens');
-const isAlreadyLoggedIn = require('./middlewares/isAlreadyLoggedIn');
+const isAlreadyLoggedIn = require('./middlewares/middleware');
 
 
 app.use("/admin",adminRoutes);
@@ -51,7 +51,7 @@ app.use("/product",productRoutes);
 
 
 app.listen(PORT,()=>{
-    console.log(`Server is running on port : ${PORT}`);
+    console.log(`Server is running on http://localhost:${PORT}`);
 });
 
 
@@ -64,28 +64,25 @@ app.post("/login",async (req,res)=>{
     let user = await userModel.findOne({email})
     let products = await productModel.find();   
     if(!user){   
-        let user = await adminModel.findOne({email})
-        if(!user){ 
-            res.status(404).send("Account does not exist! Please signup to continue.");
-        }
-        else {
-            bcrypt.compare(password,user.password,(err,result)=>{
+        res.status(404).send("Account does not exist! Please signup to continue.");
+    }
+    else {
+        bcrypt.compare(password,user.password,(err,result)=>{
+            console.log("result>>>")
+            if(user && user.isAdmin == false){
+                if(result){
+                    let token = jwt.sign({email:email, userId:user._id},process.env.JWT_KEY);
+                    res.cookie("token",token);
+                }
+                res.status(202).redirect("/");
+            }
+            else{
                 if(result){
                     let token = jwt.sign({email:email, userId:user._id},process.env.JWT_KEY);
                     res.cookie("token",token);
                 }
                 res.status(202).redirect("/admin/")
-            })
-        } 
-    }
-    else {
-        bcrypt.compare(password,user.password,(err,result)=>{
-            if(result){
-                let token = jwt.sign({email:email, userId:user._id},process.env.JWT_KEY);
-                res.cookie("token",token);
             }
-            
-            res.status(202).redirect("/");
         })
     }
         
@@ -101,7 +98,7 @@ app.post("/signup",async (req,res) => {
             
             bcrypt.genSalt(10,(err,salt)=>{
             bcrypt.hash(password,salt, async (err,hash)=>{
-                let users = await adminModel.create({
+                let users = await userModel.create({
                     fullname,
                     email,
                     password:hash

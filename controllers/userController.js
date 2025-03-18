@@ -1,6 +1,6 @@
 const { generateToken } = require('../utils/generateTokens');
 const bcrypt = require('bcryptjs');
-const userModel =  require('../models/user-model');
+const userModel =  require('../models/userModel');
 const productModel = require('../models/product-model');
 const jwt = require('jsonwebtoken');
 const moment = require('moment');
@@ -15,10 +15,11 @@ module.exports ={
     
             if (category === "all") {
                 products = await productModel.find();
+                console.log("products",products)
             } else {
                 products = await productModel.find({ category: category });
             }
-            res.render("index", { products, category });
+            res.render("index", { products, category, user:false });
         } catch (error) {
             console.error(error);
             res.status(500).send("Server Error");
@@ -30,8 +31,14 @@ module.exports ={
         res.render('profile', { currentUser, formattedDOB, user });
     },
     getProducts : async(req,res)=>{
+       try {
         let products = await productModel.find();
-        res.render("shop",{products,category: 'All Products'});
+        
+        res.render("shop",{products, user:false,category: 'All Products'}).status(201);
+       } catch (error) {
+        console.error(error);
+        res.status(500).send("Server Error");
+       }
     },
     viewCart: async (req, res) => {
         try {
@@ -112,8 +119,10 @@ module.exports ={
     
     searchProduct : async (req, res) => {
         let {search} = req.body;
-        let searchedProduct = await productModel.find({name:search});
-        res.render("productDisplay");
+        let searchedProduct = await productModel.find({keywords:{ $in : search}});
+        console.log("searchedProduct",searchedProduct);
+        
+        res.render("productDisplay",{searchedProduct});
     },
     newCollection :async (req,res) => {
         let products = await productModel.find().sort({ _id: -1 });
