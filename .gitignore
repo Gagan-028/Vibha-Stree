@@ -4,11 +4,4 @@ node_modules/
 # Ignore environment variables file
 .env
 
-# Ignore other sensitive or build files
-*.log
-*.env.local
-*.env.*.local
 
-# Ignore build artifacts or any generated files
-/dist
-/build
