@@ -10,7 +10,6 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": "",
   "dependencies": {
     "alert": "^6.0.2",
     "bcryptjs": "^2.4.3",
@@ -33,5 +32,6 @@
   },
   "devDependencies": {
     "tailwindcss": "^3.4.12"
-  }
+  },
+  "description": ""
 }
