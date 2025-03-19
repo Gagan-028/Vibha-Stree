@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-require('dotenv').config();
+require('dotenv').config(); 
 mongoose
   .connect(
     `mongodb+srv://VibhaStree:lBFru3LeB1u3xzRk@vibhastree.iflzw.mongodb.net/Vibha-Stree`)
